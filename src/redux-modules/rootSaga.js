@@ -1,5 +1,5 @@
 import { all, call, spawn } from 'redux-saga/effects';
-import sessionsSaga from './session/sessionSagas';
+import sessionsSaga from './session/sagas/sessionSagas';
 import { routinePromiseWatcherSaga } from 'redux-saga-routines';
 
 function* rootSaga() {

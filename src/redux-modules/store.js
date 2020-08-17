@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
-import rootSaga from 'sagas/rootSaga';
+import rootSaga from './rootSaga';
 import sessionSlice from './session/sessionSlice';
 
 const createStore = ({ initialState = {}, history }) => {
