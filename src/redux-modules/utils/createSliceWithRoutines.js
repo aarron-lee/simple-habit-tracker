@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createRoutine, promisifyRoutine } from 'redux-saga-routines';
 
 function createSliceWithRoutines({
-  name: string,
+  name,
   initialState = {},
   reducers = {},
   routines: routineInfo = {},

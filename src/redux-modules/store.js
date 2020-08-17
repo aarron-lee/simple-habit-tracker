@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from 'sagas/rootSaga';
+import sessionSlice from './session/sessionSlice';
 
 const createStore = ({ initialState = {}, history }) => {
   const sagaMiddleware = createSagaMiddleware();
@@ -9,6 +10,7 @@ const createStore = ({ initialState = {}, history }) => {
 
   const store = configureStore({
     reducer: {
+      session: sessionSlice.reducer,
       router: connectRouter(history),
     },
     middleware,

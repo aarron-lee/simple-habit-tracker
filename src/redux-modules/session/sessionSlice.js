@@ -9,7 +9,7 @@ const sessionSlice = createSliceWithRoutines({
     login: 'LOGIN',
   },
   routineReducers: (routines) => ({
-    [routines.LOGIN.SUCCESS]: (state, action) => {
+    [routines.login.SUCCESS]: (state, action) => {
       state.user = action.user;
     },
   }),
