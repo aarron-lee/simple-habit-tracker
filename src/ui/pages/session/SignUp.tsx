@@ -4,14 +4,21 @@ import { useCallback, SyntheticEvent } from 'react';
 import useForm from 'hooks/useForm';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
+import useCreateUser from 'redux-modules/session/hooks/useCreateUser';
 
 function SignUp() {
   const { formState, updateField } = useForm();
 
-  const onSubmit = useCallback((event: SyntheticEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-  }, []);
+  const createUser = useCreateUser();
+
+  const onSubmit = useCallback(
+    (event: SyntheticEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      createUser(formState);
+    },
+    [createUser, formState]
+  );
 
   return (
     <div>
@@ -30,7 +37,7 @@ function SignUp() {
         <TextField
           type="text"
           label="Display Name"
-          value={formState.displayName}
+          value={formState.displayName || ''}
           name="displayName"
           placeholder="Display Name"
           onChange={updateField}
@@ -39,7 +46,7 @@ function SignUp() {
         <TextField
           type="email"
           label="Email Address"
-          value={formState.email}
+          value={formState.email || ''}
           name="email"
           placeholder="Email Address"
           onChange={updateField}
@@ -50,12 +57,12 @@ function SignUp() {
           label="Password"
           required
           name="password"
-          value={formState.password}
+          value={formState.password || ''}
           placeholder="Your Password"
           onChange={updateField}
         />
-        <Button variant="contained" color="primary">
-          Sign in
+        <Button variant="contained" color="primary" type="submit">
+          Sign Up
         </Button>
         <Link to="/signin">Sign in here</Link>
         <Link to="/passwordreset">Forgot Password?</Link>
