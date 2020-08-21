@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import sessionSlice from 'redux-modules/session/sessionSlice';
-import createUser from 'firebase/mutations/createUser';
+import createUser from 'firebase/users/createUser';
 
 function* createUserSaga(action) {
   const { displayName, email, password } = action.payload;
