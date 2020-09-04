@@ -5,6 +5,11 @@ const sessionSlice = createSliceWithRoutines({
   initialState: {
     user: {},
   },
+  reducers: {
+    setCurrentUser: (state, action) => {
+      state.user = action.payload.user;
+    },
+  },
   routines: {
     login: 'LOGIN',
     createUser: 'CREATE_USER',

@@ -36,7 +36,7 @@ function SignIn() {
         <TextField
           type="email"
           label="Email Address"
-          value={formState.email}
+          value={formState.email || ''}
           name="email"
           placeholder="Email Address"
           onChange={updateField}
@@ -46,11 +46,11 @@ function SignIn() {
           label="Password"
           required
           name="password"
-          value={formState.password}
+          value={formState.password || ''}
           placeholder="Your Password"
           onChange={updateField}
         />
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" type="submit">
           Sign in
         </Button>
         <Link to="/signup">Sign up here</Link>

@@ -2,15 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { createHashHistory } from 'history';
 import createStore from 'redux-modules/store';
+import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router-dom';
-import SignIn from 'ui/pages/session/SignIn';
-import SignUp from 'ui/pages/session/SignUp';
-import ProfilePage from 'ui/pages/ProfilePage';
+import { Provider } from 'react-redux';
 
 const history = createHashHistory();
 
@@ -20,23 +16,7 @@ function initApp() {
     <React.StrictMode>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Switch>
-            <Route path="/signin">
-              <SignIn />
-            </Route>
-            <Route path="/signup">
-              <SignUp />
-            </Route>
-            <Route path="/passwordreset">
-              <SignUp />
-            </Route>
-            <Route path="/profile">
-              <ProfilePage />
-            </Route>
-            <Route path="/">
-              <App />
-            </Route>
-          </Switch>
+          <App />
         </ConnectedRouter>
       </Provider>
     </React.StrictMode>,

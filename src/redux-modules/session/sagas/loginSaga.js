@@ -4,15 +4,20 @@ import loginUser from 'firebase/users/loginUser';
 
 function* loginSaga(action) {
   const { email, password } = action.payload;
+  console.log(action);
   try {
     yield put(sessionSlice.routines.login.request());
 
-    const user = yield call(loginUser, { email, password });
+    const { user } = yield call(loginUser, { email, password });
+
+    if (user) {
+      localStorage.setItem('authUser', JSON.stringify(user));
+    }
 
     const { uid, emailVerified, displayName } = user;
 
     yield put(
-      sessionSlice.routines.loginUser.success({
+      sessionSlice.routines.login.success({
         user: { uid, email, emailVerified, displayName },
       })
     );
