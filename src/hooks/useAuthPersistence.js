@@ -8,8 +8,7 @@ function useAuthPersistence() {
   const dispatch = useDispatch();
   useEffect(() => {
     firebase.auth().onAuthStateChanged((userAuth) => {
-      console.log(userAuth);
-      dispatch(sessionSlice.actions.setCurrentUser({ user: userAuth }));
+      dispatch(sessionSlice.actions.setCurrentUser({ user: userAuth || {} }));
     });
   }, [dispatch]);
 }

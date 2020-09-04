@@ -24,7 +24,9 @@ async function generateUserDocument(user, additionalData) {
 async function createUser({ email, password, displayName }) {
   const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-  generateUserDocument(user, { displayName });
+  user.updateProfile({
+    displayName,
+  });
 
   return user;
 }

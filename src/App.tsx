@@ -6,6 +6,7 @@ import SignUp from 'ui/pages/session/SignUp';
 import ProfilePage from 'ui/pages/ProfilePage';
 import './App.css';
 import useAuthPersistence from 'hooks/useAuthPersistence';
+import SignOut from 'ui/pages/atoms/buttons/SignOut';
 
 function App() {
   useAuthPersistence();
@@ -25,6 +26,7 @@ function App() {
       </Route>
       <Route path="/">
         <div className="App">
+          <SignOut />
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <p>

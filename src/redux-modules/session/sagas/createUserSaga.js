@@ -10,8 +10,6 @@ function* createUserSaga(action) {
 
     const newUserInfo = yield call(createUser, { email, password, displayName });
 
-    console.log(newUserInfo);
-
     const { uid, email: newEmail, emailVerified, displayName: newDisplayName } = newUserInfo;
 
     yield put(
