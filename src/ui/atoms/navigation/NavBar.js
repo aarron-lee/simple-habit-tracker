@@ -60,7 +60,9 @@ const NavBar = (props) => {
                       )}
                       {isLoggedIn && (
                         <>
-                          <MenuItem onClick={toggleState}>Profile</MenuItem>
+                          <Link to="/profile">
+                            <MenuItem onClick={toggleState}>Profile</MenuItem>
+                          </Link>
                           <MenuItem onClick={toggleState}>My account</MenuItem>
                           <MenuItem
                             onClick={() => {

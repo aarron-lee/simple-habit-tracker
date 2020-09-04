@@ -9,6 +9,8 @@ import ProfilePage from 'ui/pages/ProfilePage';
 import useAuthPersistence from 'hooks/useAuthPersistence';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
+import AuthRoute from 'ui/atoms/route/AuthRoute';
+import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
 
 function App() {
   useAuthPersistence();
@@ -20,18 +22,18 @@ function App() {
           <NavBar />
         </Grid>
         <Switch>
-          <Route path="/signin">
+          <UnAuthRoute path="/signin">
             <SignIn />
-          </Route>
-          <Route path="/signup">
+          </UnAuthRoute>
+          <UnAuthRoute path="/signup">
             <SignUp />
-          </Route>
-          <Route path="/passwordreset">
-            <SignUp />
-          </Route>
-          <Route path="/profile">
+          </UnAuthRoute>
+          <UnAuthRoute path="/passwordreset">
+            <div>WIP</div>
+          </UnAuthRoute>
+          <AuthRoute path="/profile">
             <ProfilePage />
-          </Route>
+          </AuthRoute>
           <Route path="/">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />

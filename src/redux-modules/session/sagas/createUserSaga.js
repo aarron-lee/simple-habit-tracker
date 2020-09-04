@@ -1,6 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import sessionSlice from 'redux-modules/session/sessionSlice';
 import createUser from 'firebase/users/createUser';
+import { push } from 'connected-react-router';
 
 function* createUserSaga(action) {
   const { displayName, email, password } = action.payload;
@@ -17,6 +18,8 @@ function* createUserSaga(action) {
         user: { uid, email: newEmail, emailVerified, displayName: newDisplayName },
       })
     );
+
+    yield put(push('/'));
   } catch (e) {
     console.error(e);
     yield put(sessionSlice.routines.createUser.failure(e));
