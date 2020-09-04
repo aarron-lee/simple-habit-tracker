@@ -4,14 +4,20 @@ import { useCallback, SyntheticEvent } from 'react';
 import useForm from 'hooks/useForm';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
+import useLogin from 'redux-modules/session/hooks/useLogin';
 
 function SignIn() {
   const { formState, updateField } = useForm();
+  const login = useLogin();
 
-  const onSubmit = useCallback((event: SyntheticEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-  }, []);
+  const onSubmit = useCallback(
+    (event: SyntheticEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      login(formState);
+    },
+    [formState, login]
+  );
 
   return (
     <div>
