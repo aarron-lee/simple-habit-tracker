@@ -1,32 +1,35 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
 import logo from './logo.svg';
-import { Switch, Route } from 'react-router-dom';
+import NavBar from 'ui/atoms/navigation/NavBar';
 import SignIn from 'ui/pages/session/SignIn';
 import SignUp from 'ui/pages/session/SignUp';
 import ProfilePage from 'ui/pages/ProfilePage';
-import './App.css';
 import useAuthPersistence from 'hooks/useAuthPersistence';
-import SignOut from 'ui/pages/atoms/buttons/SignOut';
+import { Switch, Route } from 'react-router-dom';
+import './App.css';
 
 function App() {
   useAuthPersistence();
   return (
-    <Switch>
-      <Route path="/signin">
-        <SignIn />
-      </Route>
-      <Route path="/signup">
-        <SignUp />
-      </Route>
-      <Route path="/passwordreset">
-        <SignUp />
-      </Route>
-      <Route path="/profile">
-        <ProfilePage />
-      </Route>
-      <Route path="/">
-        <div className="App">
-          <SignOut />
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <NavBar />
+      </Grid>
+      <Switch>
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/passwordreset">
+          <SignUp />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
+        </Route>
+        <Route path="/">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <p>
@@ -41,9 +44,9 @@ function App() {
               Learn React
             </a>
           </header>
-        </div>
-      </Route>
-    </Switch>
+        </Route>
+      </Switch>
+    </Grid>
   );
 }
 
