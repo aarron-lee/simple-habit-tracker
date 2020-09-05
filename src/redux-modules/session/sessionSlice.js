@@ -4,10 +4,16 @@ const sessionSlice = createSliceWithRoutines({
   name: 'session',
   initialState: {
     user: {},
+    userSettings: {
+      habitIds: [],
+    },
   },
   reducers: {
     setCurrentUser: (state, action) => {
       state.user = action.payload.user;
+    },
+    setUserSettings: (state, action) => {
+      state.userSettings = action.payload.userSettings;
     },
   },
   routines: {
