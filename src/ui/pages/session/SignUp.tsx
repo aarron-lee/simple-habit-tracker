@@ -1,10 +1,17 @@
-/** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { useCallback, SyntheticEvent } from 'react';
+import React, { useCallback, SyntheticEvent } from 'react';
 import useForm from 'hooks/useForm';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
+import { css, cx } from 'emotion';
 import useCreateUser from 'redux-modules/session/hooks/useCreateUser';
+const formStyles = css`
+  display: flex;
+  flexdirection: column;
+  alignitems: center;
+  justifycontent: center;
+  width: 100%;
+  height: 100%;
+`;
 
 function SignUp() {
   const { formState, updateField } = useForm();
@@ -22,17 +29,7 @@ function SignUp() {
 
   return (
     <div>
-      <form
-        onSubmit={onSubmit}
-        css={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%',
-          height: '100%',
-        }}
-      >
+      <form onSubmit={onSubmit} className={cx(formStyles)}>
         Sign Up
         <TextField
           type="text"

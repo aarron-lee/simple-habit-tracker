@@ -10,7 +10,6 @@ function calculateWeeksInMonth({ month, year }) {
 
   const weeks = [];
   let currentDay = 1;
-  console.log(numDaysInMonth);
 
   while (currentDay <= numDaysInMonth) {
     const week = [];
