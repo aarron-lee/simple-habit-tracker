@@ -1,6 +1,7 @@
 import React from 'react';
 import noop from 'lodash/noop';
 import { css, cx } from 'emotion';
+import { useIsDarkTheme } from 'ui/atoms/themeProvider/ThemeProvider';
 
 const dayContainerStyles = css`
   display: flex;
@@ -29,18 +30,35 @@ const activeStyles = css`
   }
 `;
 
+const darkThemeStyles = css`
+  background-color: #282d33;
+  color: white;
+`;
+
+const darkActiveStyles = css`
+  background-color: gray;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
 function Week({ week = [], onDayClick, history }) {
+  const isDarkTheme = useIsDarkTheme();
+
   return (
     <div className={cx(dayContainerStyles)}>
       {week.map((day, idx) => {
         const onClick = day > 0 ? () => onDayClick && onDayClick(day) : noop;
 
+        const className = cx(
+          dayStyles,
+          isDarkTheme && darkThemeStyles,
+          day > 0 && clickableStyles,
+          history[day] && !isDarkTheme && activeStyles,
+          history[day] && isDarkTheme && darkActiveStyles
+        );
         return (
-          <div
-            key={`${day}-${idx}`}
-            className={cx(dayStyles, day > 0 && clickableStyles, history[day] && activeStyles)}
-            onClick={onClick}
-          >
+          <div key={`${day}-${idx}`} className={className} onClick={onClick}>
             {day > 0 ? day : ''}
           </div>
         );

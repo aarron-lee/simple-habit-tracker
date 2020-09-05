@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import NavBar from 'ui/atoms/navigation/NavBar';
 import SignIn from 'ui/pages/session/SignIn';
 import SignUp from 'ui/pages/session/SignUp';
@@ -25,7 +24,6 @@ function App() {
   const isLoggedIn = useLoggedIn();
   return (
     <>
-      <CssBaseline />
       <NavBar />
       <div>
         <Switch>

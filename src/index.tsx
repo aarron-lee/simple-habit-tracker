@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createStore from 'redux-modules/store';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from 'ui/atoms/themeProvider/ThemeProvider';
 import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
@@ -18,6 +19,7 @@ function initApp() {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <ThemeProvider>
+            <CssBaseline />
             <App />
           </ThemeProvider>
         </ConnectedRouter>

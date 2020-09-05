@@ -15,6 +15,7 @@ import useToggle from 'hooks/useToggle';
 import useLogout from 'redux-modules/session/hooks/useLogout';
 import useLoggedIn from 'hooks/useLoggedIn';
 import { Link } from 'react-router-dom';
+import { useIsDarkTheme } from '../themeProvider/ThemeProvider';
 
 const NavBar = (props) => {
   const [toggle, toggleState] = useToggle();
@@ -23,8 +24,10 @@ const NavBar = (props) => {
   const isLoggedIn = useLoggedIn();
   const logout = useLogout();
 
+  const isDarkTheme = useIsDarkTheme();
+
   return (
-    <AppBar position="static">
+    <AppBar color={isDarkTheme ? 'inherit' : 'primary'} position="static">
       <Toolbar
         style={{
           display: 'flex',
