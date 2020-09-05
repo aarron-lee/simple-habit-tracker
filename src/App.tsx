@@ -1,5 +1,4 @@
 import React from 'react';
-import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import NavBar from 'ui/atoms/navigation/NavBar';
 import SignIn from 'ui/pages/session/SignIn';
@@ -10,11 +9,20 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthRoute from 'ui/atoms/route/AuthRoute';
 import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
-import Calendar from 'ui/molecules/calendar/Calendar';
-import MonthNav from 'ui/molecules/calendar/MonthNav';
+import { css } from 'emotion';
+import useLoggedIn from 'hooks/useLoggedIn';
+import Habits from 'ui/molecules/habits/Habits';
+
+const appStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 function App() {
   useAuthPersistence();
+  const isLoggedIn = useLoggedIn();
   return (
     <>
       <CssBaseline />
@@ -34,12 +42,7 @@ function App() {
             <ProfilePage />
           </AuthRoute>
           <Route path="/">
-            <CreateHabitDialog />
-            <MonthNav>
-              {({ month, year }: { month: number; year: number }) => (
-                <Calendar month={month} year={year} />
-              )}
-            </MonthNav>
+            <div className={appStyles}>{isLoggedIn ? <Habits /> : ''}</div>
           </Route>
         </Switch>
       </div>
