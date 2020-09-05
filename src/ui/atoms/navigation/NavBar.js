@@ -17,7 +17,7 @@ import useLoggedIn from 'hooks/useLoggedIn';
 import { Link } from 'react-router-dom';
 
 const NavBar = (props) => {
-  const [toggle, toggleState, setToggle] = useToggle();
+  const [toggle, toggleState] = useToggle();
   const openMenuRef = useRef();
 
   const isLoggedIn = useLoggedIn();
@@ -48,7 +48,7 @@ const NavBar = (props) => {
           edge="end"
           aria-label="account of current user"
           ref={openMenuRef}
-          onClick={setToggle}
+          onClick={toggleState}
           aria-haspopup="true"
           color="inherit"
         >
@@ -65,22 +65,36 @@ const NavBar = (props) => {
               >
                 <Paper>
                   <ClickAwayListener onClickAway={toggleState}>
-                    <MenuList autoFocusItem={toggle} id="menu-list-grow" onKeyDown={toggleState}>
+                    <>
                       {!isLoggedIn && (
-                        <>
-                          <Link component={MuiLink} to="/signin">
-                            <MenuItem onClick={toggleState}>Login</MenuItem>
-                          </Link>
-                          <Link component={MuiLink} to="/signup">
-                            <MenuItem onClick={toggleState}>Sign Up</MenuItem>
-                          </Link>
-                        </>
+                        <MenuList
+                          autoFocusItem={toggle}
+                          id="menu-list-grow"
+                          onKeyDown={toggleState}
+                        >
+                          <MenuItem onClick={toggleState}>
+                            <Link component={MuiLink} to="/signin">
+                              Login
+                            </Link>
+                          </MenuItem>
+                          <MenuItem onClick={toggleState}>
+                            <Link component={MuiLink} to="/signup">
+                              Sign Up
+                            </Link>
+                          </MenuItem>
+                        </MenuList>
                       )}
                       {isLoggedIn && (
-                        <>
-                          <Link component={MuiLink} to="/profile">
-                            <MenuItem onClick={toggleState}>Profile</MenuItem>
-                          </Link>
+                        <MenuList
+                          autoFocusItem={toggle}
+                          id="menu-list-grow"
+                          onKeyDown={toggleState}
+                        >
+                          <MenuItem onClick={toggleState}>
+                            <Link component={MuiLink} to="/profile">
+                              Profile
+                            </Link>
+                          </MenuItem>
                           <MenuItem onClick={toggleState}>My account</MenuItem>
                           <MenuItem
                             onClick={() => {
@@ -90,9 +104,9 @@ const NavBar = (props) => {
                           >
                             Logout
                           </MenuItem>
-                        </>
+                        </MenuList>
                       )}
-                    </MenuList>
+                    </>
                   </ClickAwayListener>
                 </Paper>
               </Grow>

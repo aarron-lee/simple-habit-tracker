@@ -9,13 +9,11 @@ function* createUserSaga(action) {
   try {
     yield put(sessionSlice.routines.createUser.request());
 
-    const newUserInfo = yield call(createUser, { email, password, displayName });
-
-    const { uid, email: newEmail, emailVerified, displayName: newDisplayName } = newUserInfo;
+    const user = yield call(createUser, { email, password, displayName });
 
     yield put(
       sessionSlice.routines.createUser.success({
-        user: { uid, email: newEmail, emailVerified, displayName: newDisplayName },
+        user,
       })
     );
 
