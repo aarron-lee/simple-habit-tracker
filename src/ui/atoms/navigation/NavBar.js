@@ -5,6 +5,7 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
+import MuiLink from '@material-ui/core/Link';
 import MenuList from '@material-ui/core/MenuList';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
@@ -24,11 +25,25 @@ const NavBar = (props) => {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Typography variant="h6" noWrap>
-          Habit Tracker
+          <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
+            Habit Tracker
+          </Link>
         </Typography>
-        <div style={{ flexGrow: 1 }} />
+        <div
+          style={{
+            flexGrow: 1,
+            maxWidth: '1000px',
+          }}
+        />
         <IconButton
           edge="end"
           aria-label="account of current user"
@@ -44,24 +59,26 @@ const NavBar = (props) => {
             return (
               <Grow
                 {...TransitionProps}
-                style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                style={{
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={toggleState}>
                     <MenuList autoFocusItem={toggle} id="menu-list-grow" onKeyDown={toggleState}>
                       {!isLoggedIn && (
                         <>
-                          <Link to="/signin">
+                          <Link component={MuiLink} to="/signin">
                             <MenuItem onClick={toggleState}>Login</MenuItem>
                           </Link>
-                          <Link to="/signup">
+                          <Link component={MuiLink} to="/signup">
                             <MenuItem onClick={toggleState}>Sign Up</MenuItem>
                           </Link>
                         </>
                       )}
                       {isLoggedIn && (
                         <>
-                          <Link to="/profile">
+                          <Link component={MuiLink} to="/profile">
                             <MenuItem onClick={toggleState}>Profile</MenuItem>
                           </Link>
                           <MenuItem onClick={toggleState}>My account</MenuItem>
