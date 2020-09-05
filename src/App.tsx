@@ -11,6 +11,7 @@ import './App.css';
 import AuthRoute from 'ui/atoms/route/AuthRoute';
 import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
 import Calendar from 'ui/molecules/calendar/Calendar';
+import MonthNav from 'ui/molecules/calendar/MonthNav';
 
 function App() {
   useAuthPersistence();
@@ -34,7 +35,11 @@ function App() {
           </AuthRoute>
           <Route path="/">
             <CreateHabitDialog />
-            <Calendar month={8} year={2020} />
+            <MonthNav>
+              {({ month, year }: { month: number; year: number }) => (
+                <Calendar month={month} year={year} />
+              )}
+            </MonthNav>
           </Route>
         </Switch>
       </div>
