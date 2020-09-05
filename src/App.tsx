@@ -23,10 +23,14 @@ function App() {
         </Grid>
         <Switch>
           <UnAuthRoute path="/signin">
-            <SignIn />
+            <Grid item xs={12}>
+              <SignIn />
+            </Grid>
           </UnAuthRoute>
           <UnAuthRoute path="/signup">
-            <SignUp />
+            <Grid item xs={12}>
+              <SignUp />
+            </Grid>
           </UnAuthRoute>
           <UnAuthRoute path="/passwordreset">
             <div>WIP</div>
