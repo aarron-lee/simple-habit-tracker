@@ -9,6 +9,7 @@ type HabitProps = {
 
 const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
   const habit: { name: string; history: object | undefined } = useHabit(habitId);
+
   if (!habit) {
     return null;
   }
@@ -18,7 +19,7 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
       {name}
       <MonthNav>
         {({ month, year }: { month: number; year: number }) => (
-          <Calendar month={month} year={year} />
+          <Calendar month={month} year={year} habitId={habitId} />
         )}
       </MonthNav>
     </div>

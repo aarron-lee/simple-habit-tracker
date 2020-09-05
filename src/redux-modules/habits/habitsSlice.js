@@ -18,6 +18,7 @@ const habitsSlice = createSliceWithRoutines({
     },
   },
   routines: {
+    updateHistory: 'updateHistory',
     createHabit: 'CREATE_HABIT',
     fetchHabit: 'FETCH_HABIT',
   },
