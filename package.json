@@ -19,6 +19,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/redux": "^3.6.0",
     "connected-react-router": "^6.8.0",
+    "date-fns": "^2.16.1",
     "firebase": "^7.18.0",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
