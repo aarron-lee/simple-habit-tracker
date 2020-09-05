@@ -10,6 +10,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import AuthRoute from 'ui/atoms/route/AuthRoute';
 import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
+import Calendar from 'ui/molecules/calendar/Calendar';
 
 function App() {
   useAuthPersistence();
@@ -33,6 +34,7 @@ function App() {
           </AuthRoute>
           <Route path="/">
             <CreateHabitDialog />
+            <Calendar month={8} year={2020} />
           </Route>
         </Switch>
       </div>
