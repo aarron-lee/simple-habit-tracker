@@ -1,3 +1,3 @@
 import { firestore } from '../firebase';
 
-export async function createNewHabit(habitName, options) {}
+export async function createNewHabit(user, habitName, options) {}

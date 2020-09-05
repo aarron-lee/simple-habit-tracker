@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
-import { getIsLoggedIn } from 'redux-modules/session/selectors/getIsLoggedIn';
+import isLoggedInSelector from 'redux-modules/session/selectors/isLoggedInSelector';
 
 const useLoggedIn = () => {
-  const isLoggedIn = useSelector(getIsLoggedIn);
+  const isLoggedIn = useSelector(isLoggedInSelector);
 
   return isLoggedIn;
 };

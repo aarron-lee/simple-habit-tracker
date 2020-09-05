@@ -4,7 +4,7 @@ function useToggle(defaultValue = false) {
   const [toggle, setToggle] = useState(defaultValue);
 
   const toggleValue = useCallback(() => {
-    setToggle(() => !toggle);
+    setToggle(!toggle);
   }, [toggle]);
 
   return [toggle, toggleValue, setToggle];
