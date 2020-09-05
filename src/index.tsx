@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createStore from 'redux-modules/store';
+import ThemeProvider from 'ui/atoms/themeProvider/ThemeProvider';
 import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
@@ -16,7 +17,9 @@ function initApp() {
     <React.StrictMode>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </ConnectedRouter>
       </Provider>
     </React.StrictMode>,

@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForwardIos';
-import { css, cx } from 'emotion';
+import { css } from 'emotion';
 
 const monthNavContainerStyles = css`
   display: flex;
