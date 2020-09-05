@@ -1,6 +1,6 @@
 import React from 'react';
+import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import logo from './logo.svg';
 import NavBar from 'ui/atoms/navigation/NavBar';
 import SignIn from 'ui/pages/session/SignIn';
 import SignUp from 'ui/pages/session/SignUp';
@@ -32,20 +32,7 @@ function App() {
             <ProfilePage />
           </AuthRoute>
           <Route path="/">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>
-                Edit <code>src/App.tsx</code> and save to reload.
-              </p>
-              <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Learn React
-              </a>
-            </header>
+            <CreateHabitDialog />
           </Route>
         </Switch>
       </div>

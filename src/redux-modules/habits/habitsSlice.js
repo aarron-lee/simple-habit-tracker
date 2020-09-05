@@ -9,9 +9,10 @@ const habitsSlice = createSliceWithRoutines({
   },
   routineReducers: (routines) => ({
     [routines.createHabit.SUCCESS]: (state, action) => {
-      const { newHabit, newHabitId } = action.payload;
+      const { habit } = action.payload;
+      const { id } = habit;
 
-      state[newHabitId] = newHabit;
+      state[id] = habit;
     },
   }),
 });
