@@ -9,9 +9,13 @@ function* createHabitSaga(action) {
 
   try {
     yield put(habitsSlice.routines.createHabit.request());
-    const newHabit = yield call(createHabit, { userId: currentUserId, habitName, options });
+    const [habitId, newHabit] = yield call(createHabit, {
+      userId: currentUserId,
+      habitName,
+      options,
+    });
 
-    yield put(habitsSlice.routines.createHabit.success({ habit: newHabit }));
+    yield put(habitsSlice.routines.createHabit.success({ habit: newHabit, id: habitId }));
   } catch (e) {
     console.error(e);
     yield put(habitsSlice.routines.createHabit.failure(e));

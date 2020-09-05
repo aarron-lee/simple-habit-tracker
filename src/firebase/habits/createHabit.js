@@ -1,11 +1,21 @@
 import { firestore } from '../firebase';
 
 async function createHabit({ userId, habitName, options = {} }) {
-  const habitRef = firestore.collection('habits');
+  const userSettingsRef = firestore.collection('users').doc(userId);
 
-  const result = await habitRef.add({ name: habitName, userId, ...options });
+  const habitRef = firestore.collection('habits').doc();
+  const habitId = habitRef.id;
 
-  return result;
+  await firestore.runTransaction(async (transaction) => {
+    const userSettingsDoc = await transaction.get(userSettingsRef);
+    const userSettings = userSettingsDoc.data();
+
+    transaction.set(habitRef, { name: habitName, userId, ...options });
+
+    transaction.update(userSettingsRef, { habitIds: [...userSettings.habitIds, habitId] });
+  });
+
+  return [habitId, (await firestore.collection('habits').doc(habitId).get()).data()];
 }
 
 export default createHabit;
