@@ -1,6 +1,5 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
 import logo from './logo.svg';
 import NavBar from 'ui/atoms/navigation/NavBar';
 import SignIn from 'ui/pages/session/SignIn';
@@ -17,20 +16,14 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <NavBar />
-        </Grid>
+      <NavBar />
+      <div>
         <Switch>
           <UnAuthRoute path="/signin">
-            <Grid item xs={12}>
-              <SignIn />
-            </Grid>
+            <SignIn />
           </UnAuthRoute>
           <UnAuthRoute path="/signup">
-            <Grid item xs={12}>
-              <SignUp />
-            </Grid>
+            <SignUp />
           </UnAuthRoute>
           <UnAuthRoute path="/passwordreset">
             <div>WIP</div>
@@ -55,7 +48,7 @@ function App() {
             </header>
           </Route>
         </Switch>
-      </Grid>
+      </div>
     </>
   );
 }

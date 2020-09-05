@@ -28,6 +28,7 @@ const NavBar = (props) => {
         <Typography variant="h6" noWrap>
           Habit Tracker
         </Typography>
+        <div style={{ flexGrow: 1 }} />
         <IconButton
           edge="end"
           aria-label="account of current user"
