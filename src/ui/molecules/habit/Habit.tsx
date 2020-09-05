@@ -13,7 +13,7 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
   if (!habit) {
     return null;
   }
-  const { name, history = {} } = habit;
+  const { name } = habit;
   return (
     <div>
       {name}
