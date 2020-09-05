@@ -1,9 +1,10 @@
 import { all, call, spawn } from 'redux-saga/effects';
 import sessionsSaga from './session/sagas/sessionSagas';
+import habitSagas from './habits/sagas/habitSagas';
 import { routinePromiseWatcherSaga } from 'redux-saga-routines';
 
 function* rootSaga() {
-  const sagas = [sessionsSaga, routinePromiseWatcherSaga];
+  const sagas = [sessionsSaga, habitSagas, routinePromiseWatcherSaga];
 
   yield all(
     sagas.map((saga) =>
