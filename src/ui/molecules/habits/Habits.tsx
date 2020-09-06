@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
-import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import useHabitIds from 'redux-modules/habits/hooks/useHabitIds';
 import Habit from '../habit/Habit';
 import { css } from 'emotion';
+import { Flipper, Flipped } from 'react-flip-toolkit';
 
 const habitContainerStyles = css`
   display: flex;
@@ -16,13 +16,16 @@ const habitContainerStyles = css`
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
   return (
-    <div>
-      <CreateHabitDialog />
-      <div className={habitContainerStyles}>
+    <div className={habitContainerStyles}>
+      <Flipper flipKey={`habits-${habitIds.join('')}`}>
         {habitIds.map((habitId: string, idx: number) => {
-          return <Habit habitId={habitId} key={idx} />;
+          return (
+            <Flipped key={`habit-${habitId}`} flipId={`habit-${habitId}`}>
+              <Habit habitId={habitId} />
+            </Flipped>
+          );
         })}
-      </div>
+      </Flipper>
     </div>
   );
 };

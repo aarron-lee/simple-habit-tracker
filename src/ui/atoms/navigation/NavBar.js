@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
@@ -47,6 +48,7 @@ const NavBar = (props) => {
             maxWidth: '1000px',
           }}
         />
+        <CreateHabitDialog />
         <IconButton
           edge="end"
           aria-label="account of current user"

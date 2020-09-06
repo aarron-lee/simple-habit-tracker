@@ -23,9 +23,7 @@ export default function FormDialog() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Create Habit
-      </Button>
+      <Button onClick={handleClickOpen}>Create Habit</Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="create-habit-title">
         <DialogTitle id="create-habit-title">Create Habit</DialogTitle>
         <DialogContent>
