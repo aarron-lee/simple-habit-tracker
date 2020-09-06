@@ -10,7 +10,9 @@ const habitContainerStyles = css`
   flex-wrap: wrap;
   max-width: 1000px;
   align-items: center;
-  justify-content: center;
+  @media only screen and (max-width: 960px) {
+    justify-content: center;
+  }
 `;
 
 const Habits: FunctionComponent = () => {
