@@ -1,44 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Simple Habit Tracker
 
-## Available Scripts
+![Simple Habit Tracker](docs/images/simple-habit-tracker.png?raw=true)
 
-In the project directory, you can run:
+A basic single page progressive webapp that tracks habits.
 
-### `npm start`
+Uses a service worker for to enable install on mobile and browser
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Setup
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+setup a firebase project, and get your firebase config. Save the config variables to your `.env.local` file. The env file should look similar to the following:
 
-### `npm test`
+```
+// replace api_key, url, etc, with their respective values from your firebase project config
+REACT_APP_FIREBASE_API_KEY=api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=url
+REACT_APP_FIREBASE_DB_URL=url
+REACT_APP_FIREBASE_PROJECT_ID=id
+REACT_APP_FIREBASE_STORAGE_BUCKET=storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=id
+REACT_APP_FIREBASE_APP_ID=id
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Afterwards, setup firestore collections named `habits` and `users`. Then add the following security rules to firestore:
 
-### `npm run build`
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	match /users/{userId} {
+    	allow read, update, write: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+    match /habits/{habitId} {
+    	allow read, update, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+  }
+}
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Afterwards, run `npm run start` for to run your dev server
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+run `PUBLIC_URL=url_where_app_is_hosted npm run build`
 
-### `npm run eject`
+This will create your output files in the `build` directory
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Dependencies:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- firebase auth + firestore
+- react (create-react-app)
+- redux
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the terms of the MIT license
