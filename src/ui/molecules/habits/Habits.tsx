@@ -8,7 +8,7 @@ const habitContainerStyles = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  max-width: 1000px;
+  max-width: 960px;
   align-items: center;
   @media only screen and (max-width: 960px) {
     justify-content: center;

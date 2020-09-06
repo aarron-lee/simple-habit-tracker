@@ -11,6 +11,7 @@ import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
 import { css } from 'emotion';
 import useLoggedIn from 'hooks/useLoggedIn';
 import Habits from 'ui/molecules/habits/Habits';
+import LandingPage from 'ui/pages/LandingPage';
 
 const appStyles = css`
   display: flex;
@@ -40,7 +41,7 @@ function App() {
             <ProfilePage />
           </AuthRoute>
           <Route path="/">
-            <div className={appStyles}>{isLoggedIn ? <Habits /> : ''}</div>
+            <div className={appStyles}>{isLoggedIn ? <Habits /> : <LandingPage />}</div>
           </Route>
         </Switch>
       </div>

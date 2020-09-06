@@ -56,7 +56,7 @@ const NavBar = (props) => {
         <div
           style={{
             flexGrow: 1,
-            maxWidth: '1000px',
+            maxWidth: '960px',
           }}
         />
         <CreateHabitDialog />
