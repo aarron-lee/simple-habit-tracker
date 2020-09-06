@@ -16,8 +16,8 @@ const habitContainerStyles = css`
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
   return (
-    <div className={habitContainerStyles}>
-      <Flipper flipKey={`habits-${habitIds.join('')}`}>
+    <Flipper flipKey={`habits-${habitIds.join('')}`}>
+      <div className={habitContainerStyles}>
         {habitIds.map((habitId: string, idx: number) => {
           return (
             <Flipped key={`habit-${habitId}`} flipId={`habit-${habitId}`}>
@@ -25,8 +25,8 @@ const Habits: FunctionComponent = () => {
             </Flipped>
           );
         })}
-      </Flipper>
-    </div>
+      </div>
+    </Flipper>
   );
 };
 

@@ -10,7 +10,7 @@ import useCreateHabit from 'redux-modules/habits/hooks/useCreateHabit';
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
-  const { formState, updateField } = useForm();
+  const { formState, updateField, resetForm } = useForm();
   const createHabit = useCreateHabit();
 
   const handleClickOpen = useCallback(() => {
@@ -44,8 +44,9 @@ export default function FormDialog() {
             Cancel
           </Button>
           <Button
-            onClick={() => {
+            onClick={(e) => {
               createHabit(formState);
+              resetForm(e);
               handleClose();
             }}
             color="primary"
