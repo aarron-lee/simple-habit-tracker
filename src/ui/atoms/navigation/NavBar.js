@@ -94,11 +94,13 @@ const NavBar = (props) => {
                               Login
                             </Link>
                           </MenuItem>
-                          <MenuItem onClick={toggleState}>
-                            <Link component={MuiLink} to="/signup">
-                              Sign Up
-                            </Link>
-                          </MenuItem>
+                          {process.env.NODE_ENV !== 'production' && (
+                            <MenuItem onClick={toggleState}>
+                              <Link component={MuiLink} to="/signup">
+                                Sign Up
+                              </Link>
+                            </MenuItem>
+                          )}
                         </MenuList>
                       )}
                       {isLoggedIn && (
