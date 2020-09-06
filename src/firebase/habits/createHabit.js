@@ -10,7 +10,7 @@ async function createHabit({ userId, habitName, options = {} }) {
     const userSettingsDoc = await transaction.get(userSettingsRef);
     const userSettings = userSettingsDoc.data();
 
-    transaction.set(habitRef, { name: habitName, userId, ...options });
+    transaction.set(habitRef, { name: habitName, userId, archived: false, ...options });
 
     transaction.update(userSettingsRef, { habitIds: [...userSettings.habitIds, habitId] });
   });

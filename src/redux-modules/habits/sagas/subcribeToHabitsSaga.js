@@ -7,7 +7,10 @@ import currentUserIdSelector from 'redux-modules/session/selectors/currentUserId
 
 function subscriptionChannel({ userId }) {
   return eventChannel((emitter) => {
-    const habitsRef = firestore.collection('habits').where('userId', '==', userId);
+    const habitsRef = firestore
+      .collection('habits')
+      .where('userId', '==', userId)
+      .where('archived', '==', false);
 
     const unsubscribe = habitsRef.onSnapshot((querySnapshot) => {
       querySnapshot.docChanges().forEach((change) => {
