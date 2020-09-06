@@ -7,11 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useForm from 'hooks/useForm';
 import useCreateHabit from 'redux-modules/habits/hooks/useCreateHabit';
+import useLoggedIn from 'hooks/useLoggedIn';
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
   const { formState, updateField, resetForm } = useForm();
   const createHabit = useCreateHabit();
+  const isLoggedIn = useLoggedIn();
 
   const handleClickOpen = useCallback(() => {
     setOpen(true);
@@ -20,6 +22,10 @@ export default function FormDialog() {
   const handleClose = useCallback(() => {
     setOpen(false);
   }, []);
+
+  if (!isLoggedIn) {
+    return null;
+  }
 
   return (
     <div>
