@@ -17,6 +17,17 @@ import useLogout from 'redux-modules/session/hooks/useLogout';
 import useLoggedIn from 'hooks/useLoggedIn';
 import { Link } from 'react-router-dom';
 import { useIsDarkTheme } from '../themeProvider/ThemeProvider';
+import { css } from 'emotion';
+
+const linkStyles = css`
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+`;
 
 const NavBar = (props) => {
   const [toggle, toggleState] = useToggle();
@@ -76,6 +87,7 @@ const NavBar = (props) => {
                           autoFocusItem={toggle}
                           id="menu-list-grow"
                           onKeyDown={toggleState}
+                          className={linkStyles}
                         >
                           <MenuItem onClick={toggleState}>
                             <Link component={MuiLink} to="/signin">
@@ -94,6 +106,7 @@ const NavBar = (props) => {
                           autoFocusItem={toggle}
                           id="menu-list-grow"
                           onKeyDown={toggleState}
+                          className={linkStyles}
                         >
                           <MenuItem onClick={toggleState}>
                             <Link component={MuiLink} to="/profile">
