@@ -7,6 +7,7 @@ import MonthNav from 'ui/molecules/calendar/MonthNav';
 import useHabit from 'redux-modules/habits/hooks/useHabit';
 import { css } from 'emotion';
 import { IconButton } from '@material-ui/core';
+import useDeleteHabit from 'redux-modules/habits/hooks/useDeleteHabit';
 
 const cardStyles: string = css`
   margin: 8px;
@@ -32,6 +33,8 @@ type HabitProps = {
 const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
   const habit: { name: string; history: object | undefined } = useHabit(habitId);
 
+  const deleteHabit = useDeleteHabit(habitId);
+
   if (!habit) {
     return null;
   }
@@ -41,7 +44,7 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
       <div className={cardHeaderStyles}>
         <Typography variant="h6">{name}</Typography>
         <div className={fillerStyles} />
-        <IconButton style={{ padding: '8px', width: '12px', height: '12px' }}>
+        <IconButton onClick={deleteHabit} style={{ padding: '8px', width: '12px', height: '12px' }}>
           <CloseIcon />
         </IconButton>
       </div>
