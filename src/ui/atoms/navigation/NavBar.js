@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -18,6 +19,21 @@ import useLoggedIn from 'hooks/useLoggedIn';
 import { Link } from 'react-router-dom';
 import { useIsDarkTheme } from '../themeProvider/ThemeProvider';
 import { css } from 'emotion';
+import { getDate } from 'date-fns';
+
+const currentDay = () => {
+  return getDate(Date.now());
+};
+
+const calendarStyles = css`
+  position: relative;
+  ::after {
+    content: "${currentDay()}";
+    position: absolute;
+    left: 8px;
+    top: 5px;
+  }
+`;
 
 const linkStyles = css`
   a {
@@ -60,6 +76,9 @@ const NavBar = props => {
           }}
         />
         <CreateHabitDialog />
+        <div className={calendarStyles}>
+          <CalendarTodayIcon />
+        </div>
         <IconButton
           edge="end"
           aria-label="account of current user"
