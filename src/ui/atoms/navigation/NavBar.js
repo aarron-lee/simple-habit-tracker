@@ -29,7 +29,7 @@ const linkStyles = css`
   }
 `;
 
-const NavBar = (props) => {
+const NavBar = props => {
   const [toggle, toggleState] = useToggle();
   const openMenuRef = useRef();
 
@@ -39,13 +39,13 @@ const NavBar = (props) => {
   const isDarkTheme = useIsDarkTheme();
 
   return (
-    <AppBar color={isDarkTheme ? 'inherit' : 'primary'} position="static">
+    <AppBar color={isDarkTheme ? 'inherit' : 'primary'} position="sticky">
       <Toolbar
         style={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'center',
+          alignItems: 'center'
         }}
       >
         <Typography variant="h6" noWrap>
@@ -56,7 +56,7 @@ const NavBar = (props) => {
         <div
           style={{
             flexGrow: 1,
-            maxWidth: '960px',
+            maxWidth: '960px'
           }}
         />
         <CreateHabitDialog />
@@ -76,7 +76,7 @@ const NavBar = (props) => {
               <Grow
                 {...TransitionProps}
                 style={{
-                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'
                 }}
               >
                 <Paper>
