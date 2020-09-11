@@ -22,15 +22,15 @@ import { css } from 'emotion';
 import { getDate } from 'date-fns';
 
 const currentDay = () => {
-  return getDate(Date.now());
+  return `${getDate(Date.now())}`.padStart(2, '0');
 };
 
 const calendarStyles = css`
   position: relative;
   ::after {
-    content: "${currentDay()}";
+    content: '${currentDay()}';
     position: absolute;
-    left: 8px;
+    left: 5px;
     top: 5px;
   }
 `;
@@ -45,7 +45,7 @@ const linkStyles = css`
   }
 `;
 
-const NavBar = props => {
+const NavBar = (props) => {
   const [toggle, toggleState] = useToggle();
   const openMenuRef = useRef();
 
@@ -61,7 +61,7 @@ const NavBar = props => {
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Typography variant="h6" noWrap>
@@ -72,7 +72,7 @@ const NavBar = props => {
         <div
           style={{
             flexGrow: 1,
-            maxWidth: '960px'
+            maxWidth: '960px',
           }}
         />
         <CreateHabitDialog />
@@ -95,7 +95,7 @@ const NavBar = props => {
               <Grow
                 {...TransitionProps}
                 style={{
-                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom'
+                  transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
                 }}
               >
                 <Paper>

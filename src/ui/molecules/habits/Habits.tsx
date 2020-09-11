@@ -8,9 +8,9 @@ const habitContainerStyles = css`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  max-width: 960px;
+  max-width: 1000px;
   align-items: center;
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 1000px) {
     justify-content: center;
   }
 `;

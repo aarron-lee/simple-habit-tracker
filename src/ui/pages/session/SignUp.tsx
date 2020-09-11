@@ -1,4 +1,4 @@
-import React, { useCallback, SyntheticEvent } from 'react';
+import React, { useCallback, SyntheticEvent, FunctionComponent } from 'react';
 import useForm from 'hooks/useForm';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
@@ -6,14 +6,21 @@ import { css, cx } from 'emotion';
 import useCreateUser from 'redux-modules/session/hooks/useCreateUser';
 const formStyles = css`
   display: flex;
-  flexdirection: column;
-  alignitems: center;
-  justifycontent: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
+  > * {
+    margin: 10px;
+  }
 `;
 
-function SignUp() {
+type SignUpProps = {
+  className?: string | undefined;
+};
+
+const SignUp: FunctionComponent<SignUpProps> = ({ className }) => {
   const { formState, updateField } = useForm();
 
   const createUser = useCreateUser();
@@ -29,7 +36,7 @@ function SignUp() {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className={cx(formStyles)}>
+      <form onSubmit={onSubmit} className={cx(formStyles, className)}>
         Sign Up
         <TextField
           type="text"
@@ -66,6 +73,6 @@ function SignUp() {
       </form>
     </div>
   );
-}
+};
 
 export default SignUp;

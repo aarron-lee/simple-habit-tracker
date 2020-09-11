@@ -1,4 +1,4 @@
-import React, { useCallback, SyntheticEvent } from 'react';
+import React, { useCallback, SyntheticEvent, FunctionComponent } from 'react';
 import useForm from 'hooks/useForm';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@material-ui/core';
@@ -7,14 +7,21 @@ import useLogin from 'redux-modules/session/hooks/useLogin';
 
 const formStyles = css`
   display: flex;
-  flexdirection: column;
-  alignitems: center;
-  justifycontent: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
+  > * {
+    margin: 5px;
+  }
 `;
 
-function SignIn() {
+type SignInProps = {
+  className?: string | undefined;
+};
+
+const SignIn: FunctionComponent<SignInProps> = ({ className }) => {
   const { formState, updateField } = useForm();
   const login = useLogin();
 
@@ -29,7 +36,7 @@ function SignIn() {
 
   return (
     <div>
-      <form onSubmit={onSubmit} className={cx(formStyles)}>
+      <form onSubmit={onSubmit} className={cx(formStyles, className)}>
         Sign In
         <TextField
           type="email"
@@ -56,6 +63,6 @@ function SignIn() {
       </form>
     </div>
   );
-}
+};
 
 export default SignIn;
