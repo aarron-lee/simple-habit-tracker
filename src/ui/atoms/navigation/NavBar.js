@@ -30,8 +30,8 @@ const calendarStyles = css`
   ::after {
     content: '${currentDay()}';
     position: absolute;
-    left: 5px;
-    top: 5px;
+    left: 10px;
+    top: 10px;
   }
 `;
 
@@ -77,7 +77,7 @@ const NavBar = (props) => {
         />
         <CreateHabitDialog />
         <div className={calendarStyles}>
-          <CalendarTodayIcon />
+          <CalendarTodayIcon fontSize="large" />
         </div>
         <IconButton
           edge="end"
