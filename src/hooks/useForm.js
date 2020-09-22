@@ -12,8 +12,8 @@ const formReducer = (state, action) => {
   }
 };
 
-function useForm() {
-  const [state, dispatch] = useReducer(formReducer, {});
+function useForm(initialState = {}) {
+  const [state, dispatch] = useReducer(formReducer, initialState);
 
   const updateField = ({ target }) =>
     dispatch({
@@ -21,7 +21,7 @@ function useForm() {
       field: target.name,
       payload: target.value,
     });
-  const resetForm = ({ target }) =>
+  const resetForm = () =>
     dispatch({
       type: RESET,
     });

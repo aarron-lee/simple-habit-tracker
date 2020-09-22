@@ -52,7 +52,7 @@ export default function FormDialog() {
           <Button
             onClick={(e) => {
               createHabit(formState);
-              resetForm(e);
+              resetForm();
               handleClose();
             }}
             color="primary"
