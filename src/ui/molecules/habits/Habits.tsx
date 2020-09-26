@@ -23,7 +23,7 @@ const Habits: FunctionComponent = () => {
         {habitIds.map((habitId: string, idx: number) => {
           return (
             <Flipped key={`habit-${habitId}`} flipId={`habit-${habitId}`}>
-              <Habit habitId={habitId} />
+              <Habit habitId={habitId} order={idx} />
             </Flipped>
           );
         })}

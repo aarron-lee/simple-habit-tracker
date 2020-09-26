@@ -24,11 +24,19 @@ const cardHeaderStyles: string = css`
   align-items: center;
 `;
 
+const titleStyles: string = css`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 20ch;
+`;
+
 type HabitProps = {
   habitId: string;
+  order: number;
 };
 
-const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
+const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
   const habit: { name: string; history: object | undefined } = useHabit(habitId);
 
   if (!habit) {
@@ -38,7 +46,9 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
   return (
     <Card className={cardStyles}>
       <div className={cardHeaderStyles}>
-        <Typography variant="h6">{name}</Typography>
+        <Typography variant="h6" className={titleStyles}>
+          {name}
+        </Typography>
         <div className={fillerStyles} />
         <HabitOptions habitId={habitId} />
       </div>
