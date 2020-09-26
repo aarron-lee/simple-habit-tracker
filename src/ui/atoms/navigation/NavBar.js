@@ -129,12 +129,12 @@ const NavBar = (props) => {
                           onKeyDown={toggleState}
                           className={linkStyles}
                         >
-                          <MenuItem onClick={toggleState}>
+                          {/* <MenuItem onClick={toggleState}>
                             <Link component={MuiLink} to="/profile">
                               Profile
                             </Link>
                           </MenuItem>
-                          <MenuItem onClick={toggleState}>My account</MenuItem>
+                          <MenuItem onClick={toggleState}>My account</MenuItem> */}
                           <MenuItem
                             onClick={() => {
                               logout();
