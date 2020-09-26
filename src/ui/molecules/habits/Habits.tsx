@@ -18,17 +18,24 @@ const habitContainerStyles = css`
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
   return (
-    <Flipper flipKey={`habits-${habitIds.join('')}`}>
-      <div className={habitContainerStyles}>
-        {habitIds.map((habitId: string, idx: number) => {
-          return (
-            <Flipped key={`habit-${habitId}`} flipId={`habit-${habitId}`}>
-              <Habit habitId={habitId} order={idx} />
-            </Flipped>
-          );
-        })}
-      </div>
-    </Flipper>
+    <>
+      {habitIds.length > 0 && (
+        <Flipper flipKey={habitIds.join('')}>
+          <div className={habitContainerStyles}>
+            {habitIds.map((habitId: string, idx: number) => {
+              return (
+                <Flipped key={habitId} flipId={habitId}>
+                  {/* <Flipped/> needs a div child */}
+                  <div>
+                    <Habit habitId={habitId} order={idx} />
+                  </div>
+                </Flipped>
+              );
+            })}
+          </div>
+        </Flipper>
+      )}
+    </>
   );
 };
 

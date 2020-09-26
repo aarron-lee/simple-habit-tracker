@@ -7,7 +7,7 @@ import MonthNav from 'ui/molecules/calendar/MonthNav';
 import Typography from '@material-ui/core/Typography';
 import useHabit from 'redux-modules/habits/hooks/useHabit';
 import { css } from 'emotion';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 import HabitOptions from './HabitOptions';
 import HabitDropZone from './HabitDropZone';
 
