@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import useDeleteHabit from 'redux-modules/habits/hooks/useDeleteHabit';
 import useHabit from 'redux-modules/habits/hooks/useHabit';
 import RenameHabitDialog from '../dialogs/RenameHabitDialog';
+import DeleteHabitDialog from '../dialogs/DeleteHabitDialog';
 
 type HabitOptionProps = {
   habitId: string;
@@ -21,6 +22,7 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
   const closeOptions = () => setIsOpen(false);
 
   const [renameOpen, setIsRenameOpen] = useState(false);
+  const [deleteOpen, setIsDeleteOpen] = useState(false);
 
   const deleteHabit = useDeleteHabit(habitId);
 
@@ -54,7 +56,7 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            deleteHabit();
+            setIsDeleteOpen(true);
             closeOptions();
           }}
         >
@@ -62,6 +64,11 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         </MenuItem>
       </Menu>
       <RenameHabitDialog isOpen={renameOpen} habitId={habitId} setIsRenameOpen={setIsRenameOpen} />
+      <DeleteHabitDialog
+        isOpen={deleteOpen}
+        deleteHabit={deleteHabit}
+        closeDialog={() => setIsDeleteOpen(false)}
+      />
     </>
   );
 };

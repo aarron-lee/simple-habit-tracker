@@ -46,16 +46,13 @@ export default function FormDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={(e) => {
               createHabit(formState);
               resetForm();
               handleClose();
             }}
-            color="primary"
           >
             Create
           </Button>
