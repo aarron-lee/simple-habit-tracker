@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useDrop } from 'react-dnd';
 import { HabitDragItem } from './Habit';
 import { css, cx } from 'emotion';
+import useSwapHabit from 'redux-modules/habits/hooks/useSwapHabit';
 
 const hoveringStyles = css`
   opacity: 0.8;
@@ -17,6 +18,7 @@ type Props = {
 
 const HabitDropZone: FunctionComponent<Props> = (props) => {
   const { habitId } = props;
+  const swapHabit = useSwapHabit();
   const [dropCollectedProps, drop] = useDrop({
     accept: 'habit',
     canDrop: (item: HabitDragItem) => {
@@ -26,6 +28,7 @@ const HabitDropZone: FunctionComponent<Props> = (props) => {
       const { id: droppedItemId, type: droppedItemType } = item;
       if (droppedItemType === 'habit') {
         // habit dropped, dispatch action to reorder habits
+        swapHabit({ firstHabitId: droppedItemId, secondHabitId: habitId });
       }
     },
     collect: (monitor) => ({

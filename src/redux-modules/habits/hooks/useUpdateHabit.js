@@ -7,14 +7,14 @@ const { routines } = habitsSlice;
 function useUpdateHabit() {
   const dispatch = useDispatch();
 
-  const createUser = useCallback(
+  const updateHabit = useCallback(
     ({ id, habit: { name } }) => {
       dispatch(routines.updateHabit.trigger({ id, habit: { name } }));
     },
     [dispatch]
   );
 
-  return createUser;
+  return updateHabit;
 }
 
 export default useUpdateHabit;

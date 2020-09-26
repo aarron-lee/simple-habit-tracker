@@ -23,6 +23,7 @@ const habitsSlice = createSliceWithRoutines({
     updateHabit: 'UPDATE_HABIT',
     deleteHabit: 'DELETE_HABIT',
     fetchHabit: 'FETCH_HABIT',
+    swapHabit: 'SWAP_HABIT',
   },
   routineReducers: (routines) => ({
     [routines.createHabit.SUCCESS]: (state, action) => {

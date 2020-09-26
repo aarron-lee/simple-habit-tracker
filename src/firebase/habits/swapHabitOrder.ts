@@ -29,7 +29,7 @@ async function swapHabitOrder({
 
     // swap IDs in arr
     newHabitIds[firstHabitIdx] = secondHabitId;
-    newHabitIds[secondHabitIdx] = firstHabitIdx;
+    newHabitIds[secondHabitIdx] = firstHabitId;
 
     await transaction.update(userSettingsRef, { habitIds: newHabitIds });
 
