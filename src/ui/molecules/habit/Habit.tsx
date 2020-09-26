@@ -49,7 +49,7 @@ export type HabitDragItem = {
 const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
   const habit: { name: string; history: object | undefined } = useHabit(habitId);
 
-  const [, drag] = useDrag({
+  const [, drag, preview] = useDrag({
     item: { id: habitId, type: 'habit', order },
   });
 
@@ -59,7 +59,7 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
   const { name } = habit;
   return (
     <HabitDropZone habitId={habitId}>
-      <Card className={cardStyles}>
+      <Card className={cardStyles} ref={preview}>
         <div className={cardHeaderStyles}>
           <IconButton
             ref={drag}
