@@ -5,9 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import createStore from 'redux-modules/store';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 import ThemeProvider from 'ui/atoms/themeProvider/ThemeProvider';
 import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
+import { DndProvider } from 'react-dnd-multi-backend';
 import { Provider } from 'react-redux';
 
 const history = createHashHistory();
@@ -17,12 +19,14 @@ function initApp() {
   return ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <ThemeProvider>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
-        </ConnectedRouter>
+        <DndProvider options={HTML5toTouch}>
+          <ConnectedRouter history={history}>
+            <ThemeProvider>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
+          </ConnectedRouter>
+        </DndProvider>
       </Provider>
     </React.StrictMode>,
     document.getElementById('root')
