@@ -98,7 +98,7 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId }) => {
             }}
             color="primary"
           >
-            Create
+            Update Name
           </Button>
         </DialogActions>
       </Dialog>
