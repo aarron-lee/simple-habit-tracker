@@ -11,7 +11,7 @@
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.16.1",
     "emotion": "^10.0.27",
-    "firebase": "^7.21.1",
+    "firebase": "^7.23.0",
     "lodash": "^4.17.20",
     "react": "^16.13.1",
     "react-dnd": "^11.1.3",
