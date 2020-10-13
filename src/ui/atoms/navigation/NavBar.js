@@ -4,11 +4,15 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import CreateHabitDialog from 'ui/molecules/dialogs/CreateHabitDialog';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import Grow from '@material-ui/core/Grow';
 import IconButton from '@material-ui/core/IconButton';
+import Drawer from 'ui/molecules/drawer/Drawer';
 import MenuItem from '@material-ui/core/MenuItem';
+
 import MuiLink from '@material-ui/core/Link';
 import MenuList from '@material-ui/core/MenuList';
+import NotesIcon from '@material-ui/icons/Notes';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import Typography from '@material-ui/core/Typography';
@@ -64,6 +68,14 @@ const NavBar = (props) => {
           alignItems: 'center',
         }}
       >
+        <Drawer>
+          <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
+            <Drawer.ListItem text="Habits" icon={EventNoteIcon} />
+          </Link>
+          <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/notes">
+            <Drawer.ListItem text="Notes" icon={NotesIcon} />
+          </Link>
+        </Drawer>
         <Typography variant="h6" noWrap>
           <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
             Habit Tracker

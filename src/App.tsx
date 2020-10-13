@@ -40,6 +40,9 @@ function App() {
           <AuthRoute path="/profile">
             <ProfilePage />
           </AuthRoute>
+          <AuthRoute path="/notes">
+            <ProfilePage />
+          </AuthRoute>
           <Route path="/">
             <div className={appStyles}>{isLoggedIn ? <Habits /> : <LandingPage />}</div>
           </Route>

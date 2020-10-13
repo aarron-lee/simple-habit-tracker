@@ -37,6 +37,7 @@ const RenameHabitDialog: FunctionComponent<RenameHabitDialogProps> = ({
           label="Habit Name"
           type="text"
           fullWidth
+          autoComplete="off"
         />
       </DialogContent>
       <DialogActions>

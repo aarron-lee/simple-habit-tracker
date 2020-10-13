@@ -43,6 +43,7 @@ export default function FormDialog() {
             label="Habit Name"
             type="text"
             fullWidth
+            autoComplete="off"
           />
         </DialogContent>
         <DialogActions>
