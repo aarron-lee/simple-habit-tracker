@@ -22,9 +22,10 @@ jobs:
           REACT_APP_FIREBASE_STORAGE_BUCKET: ${{ secrets.REACT_APP_FIREBASE_STORAGE_BUCKET }}
           REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}
           REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
+          PUBLIC_URL: ${{secrets.PUBLIC_URL}}
         run: |
           npm install
-          PUBLIC_URL=${{ secrets.PUBLIC_URL }} npm run build
+          PUBLIC_URL=$PUBLIC_URL npm run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.0.0
