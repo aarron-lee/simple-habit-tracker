@@ -8,8 +8,8 @@ function useUpdateHabit() {
   const dispatch = useDispatch();
 
   const updateHabit = useCallback(
-    ({ id, habit: { name } }) => {
-      dispatch(routines.updateHabit.trigger({ id, habit: { name } }));
+    ({ id, habit }) => {
+      dispatch(routines.updateHabit.trigger({ id, habit }));
     },
     [dispatch]
   );

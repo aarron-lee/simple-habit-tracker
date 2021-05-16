@@ -10,6 +10,8 @@ import { css } from 'emotion';
 import { useDrag } from 'react-dnd';
 import HabitOptions from './HabitOptions';
 import HabitDropZone from './HabitDropZone';
+import HabitNotes from './HabitNotes';
+import useUpdateHabit from 'redux-modules/habits/hooks/useUpdateHabit';
 
 const cardStyles: string = css`
   margin: 8px;
@@ -47,17 +49,29 @@ export type HabitDragItem = {
   order: number;
 };
 
+type HabitType = {
+  name: string;
+  history: object | undefined;
+  notes: string | undefined
+}
+
 const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
-  const habit: { name: string; history: object | undefined } = useHabit(habitId);
+  const habit: HabitType = useHabit(habitId);
 
   const [, drag, preview] = useDrag({
     item: { id: habitId, type: 'habit', order },
   });
 
+  const updateHabit = useUpdateHabit()
+
+  const updateNotes = (notes: string) => {
+    updateHabit({ id: habitId, habit: { notes } })
+  }
+
   if (!habit) {
     return null;
   }
-  const { name } = habit;
+  const { name, notes } = habit;
   return (
     <HabitDropZone habitId={habitId}>
       <Card className={cardStyles} ref={preview}>
@@ -76,8 +90,11 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
           <HabitOptions habitId={habitId} />
         </div>
         <MonthNav>
-          {({ month, year }: { month: number; year: number }) => (
-            <Calendar month={month} year={year} habitId={habitId} />
+          {({ month, year, notesOpen }: { month: number; year: number; notesOpen: boolean }) => (
+            <>
+              <HabitNotes notes={notes ?? ''} notesOpen={notesOpen} updateNotes={updateNotes} />
+              <Calendar month={month} year={year} habitId={habitId} />
+            </>
           )}
         </MonthNav>
       </Card>

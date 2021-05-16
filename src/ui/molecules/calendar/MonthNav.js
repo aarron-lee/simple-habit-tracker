@@ -4,6 +4,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ArrowBackIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForwardIos';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { css } from 'emotion';
 
 const monthNavContainerStyles = css`
@@ -14,6 +16,7 @@ const monthNavContainerStyles = css`
 const navStyles = css`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 `;
 
 const Months = [
@@ -38,6 +41,11 @@ function MonthNav({
 }) {
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
+  const [notesOpen, setNotesOpen] = useState(false);
+
+  const toggleNotes = () => {
+    setNotesOpen(!notesOpen)
+  }
 
   const navigateBackwards = useCallback(() => {
     let newMonth = month - 1;
@@ -62,17 +70,25 @@ function MonthNav({
   return (
     <div className={monthNavContainerStyles}>
       <div className={navStyles}>
-        <IconButton size="small" onClick={navigateBackwards}>
-          <ArrowBackIcon />
+        <div className={navStyles}>
+          <IconButton size="small" onClick={navigateBackwards}>
+            <ArrowBackIcon />
+          </IconButton>
+          <IconButton size="small" onClick={navigateForwards}>
+            <ArrowForwardIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            {Months[month].name} {year}
+          </Typography>
+        </div>
+        <IconButton size="small" onClick={toggleNotes}>
+          {notesOpen ?
+            <KeyboardArrowUpIcon /> :
+            <KeyboardArrowDownIcon />
+          }
         </IconButton>
-        <IconButton size="small" onClick={navigateForwards}>
-          <ArrowForwardIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          {Months[month].name} {year}
-        </Typography>
       </div>
-      <div>{children({ month, year })}</div>
+      <div>{children({ month, year, notesOpen })}</div>
     </div>
   );
 }
