@@ -68,14 +68,15 @@ const NavBar = (props) => {
           alignItems: 'center',
         }}
       >
-        <Drawer>
+        {/* TODO: notes tab */}
+        {/* <Drawer>
           <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
             <Drawer.ListItem text="Habits" icon={EventNoteIcon} />
           </Link>
           <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/notes">
             <Drawer.ListItem text="Notes" icon={NotesIcon} />
           </Link>
-        </Drawer>
+        </Drawer> */}
         <Typography variant="h6" noWrap>
           <Link style={{ color: 'inherit', textDecoration: 'none' }} to="/">
             Habit Tracker
