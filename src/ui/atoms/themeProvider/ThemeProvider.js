@@ -1,24 +1,28 @@
 import React from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ThemeProvider as MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-export const useIsDarkTheme = () => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+const DEFAULT = 'dark'
 
-  return prefersDarkMode;
+export const useIsDarkTheme = () => {
+  return true;
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  // return prefersDarkMode;
 };
 
 function ThemeProvider({ children }) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   const theme = React.useMemo(
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
+          type: DEFAULT // prefersDarkMode ? 'dark' : 'light',
         },
       }),
-    [prefersDarkMode]
+    []
+    // [prefersDarkMode]
   );
 
   return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
