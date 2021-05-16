@@ -7,6 +7,7 @@ import createStore from 'redux-modules/store';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 import ThemeProvider from 'ui/atoms/themeProvider/ThemeProvider';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { createHashHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 import { DndProvider } from 'react-dnd-multi-backend';
@@ -39,5 +40,5 @@ document.addEventListener('DOMContentLoaded', initApp);
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 if (process.env.NODE_ENV === 'production') {
-  serviceWorker.register();
+  serviceWorkerRegistration.register();
 }
