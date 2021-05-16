@@ -14,6 +14,7 @@ import HabitDropZone from './HabitDropZone';
 const cardStyles: string = css`
   margin: 8px;
   padding: 16px;
+  min-height: 352px;
   text-transform: capitalize;
   position: relative;
 `;
