@@ -1,4 +1,4 @@
-import { getDay, getDaysInMonth } from 'date-fns';
+import { getDay, getDaysInMonth, getWeekOfMonth } from 'date-fns';
 
 const SATURDAY = 6;
 
@@ -7,6 +7,8 @@ function calculateWeeksInMonth({ month, year }) {
   const numDaysInMonth = getDaysInMonth(new Date(year, month));
   // 0 Sun, 1 Mon, etc.
   const firstDayOfMonth = getDay(new Date(year, month, 1));
+
+  const weekNumForToday = getWeekOfMonth(new Date()) - 1
 
   const weeks = [];
   let currentDay = 1;
@@ -37,7 +39,7 @@ function calculateWeeksInMonth({ month, year }) {
     weeks.push(week);
   }
 
-  return weeks;
+  return [weeks, weekNumForToday];
 }
 
 export default calculateWeeksInMonth;

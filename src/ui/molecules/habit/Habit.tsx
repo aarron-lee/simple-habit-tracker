@@ -16,7 +16,6 @@ import useUpdateHabit from 'redux-modules/habits/hooks/useUpdateHabit';
 const cardStyles: string = css`
   margin: 8px;
   padding: 16px;
-  min-height: 352px;
   text-transform: capitalize;
   position: relative;
 `;
@@ -41,6 +40,7 @@ const titleStyles: string = css`
 type HabitProps = {
   habitId: string;
   order: number;
+  habitViewType: 'week' | 'month'
 };
 
 export type HabitDragItem = {
@@ -55,7 +55,7 @@ type HabitType = {
   notes: string | undefined
 }
 
-const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
+const Habit: FunctionComponent<HabitProps> = ({ habitId, order, habitViewType }) => {
   const habit: HabitType = useHabit(habitId);
 
   const [, drag, preview] = useDrag({
@@ -89,11 +89,11 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId, order }) => {
           <div className={fillerStyles} />
           <HabitOptions habitId={habitId} />
         </div>
-        <MonthNav>
+        <MonthNav showMonthNavButtons={habitViewType === 'month'}>
           {({ month, year, notesOpen }: { month: number; year: number; notesOpen: boolean }) => (
             <>
               <HabitNotes notes={notes ?? ''} notesOpen={notesOpen} updateNotes={updateNotes} />
-              <Calendar month={month} year={year} habitId={habitId} />
+              <Calendar month={month} year={year} habitId={habitId} habitViewType={habitViewType} />
             </>
           )}
         </MonthNav>

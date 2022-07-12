@@ -22,6 +22,17 @@ const habitContainerStyles = css`
   }
 `;
 
+const weekHabitContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  align-items: center;
+  @media only screen and (max-width: 1000px) {
+    justify-content: center;
+  }
+`;
+
 const useToggleHabitViewType = () => {
   const habitViewType = useHabitViewType()
 
@@ -48,13 +59,13 @@ const Habits: FunctionComponent = () => {
       <button onClick={toggleHabitViewType}>toggle habit view</button>
       {habitIds.length > 0 && (
         <Flipper flipKey={habitIds.join('')}>
-          <div className={habitContainerStyles}>
+          <div className={habitViewType === HABIT_VIEW_TYPE.week ? weekHabitContainerStyles : habitContainerStyles}>
             {habitIds.map((habitId: string, idx: number) => {
               return (
                 <Flipped key={habitId} flipId={habitId}>
                   {/* <Flipped/> needs a div child */}
                   <div>
-                    <Habit habitId={habitId} order={idx} />
+                    <Habit habitId={habitId} order={idx} habitViewType={habitViewType} />
                   </div>
                 </Flipped>
               );

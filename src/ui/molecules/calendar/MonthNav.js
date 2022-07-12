@@ -38,6 +38,7 @@ function MonthNav({
   children,
   currentMonth = getMonth(Date.now()),
   currentYear = getYear(Date.now()),
+  showMonthNavButtons = true
 }) {
   const [month, setMonth] = useState(currentMonth);
   const [year, setYear] = useState(currentYear);
@@ -71,12 +72,16 @@ function MonthNav({
     <div className={monthNavContainerStyles}>
       <div className={navStyles}>
         <div className={navStyles}>
-          <IconButton size="small" onClick={navigateBackwards}>
-            <ArrowBackIcon />
-          </IconButton>
-          <IconButton size="small" onClick={navigateForwards}>
-            <ArrowForwardIcon />
-          </IconButton>
+          {showMonthNavButtons &&
+            <>
+              <IconButton size="small" onClick={navigateBackwards}>
+                <ArrowBackIcon />
+              </IconButton>
+              <IconButton size="small" onClick={navigateForwards}>
+                <ArrowForwardIcon />
+              </IconButton>
+            </>
+          }
           <Typography variant="h6" noWrap>
             {Months[month].name} {year}
           </Typography>
