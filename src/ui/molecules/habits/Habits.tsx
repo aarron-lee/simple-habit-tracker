@@ -3,6 +3,13 @@ import useHabitIds from 'redux-modules/habits/hooks/useHabitIds';
 import Habit from '../habit/Habit';
 import { css } from 'emotion';
 import { Flipper, Flipped } from 'react-flip-toolkit';
+import useUpdateHabitViewType from 'redux-modules/session/hooks/useUpdateHabitView';
+import useHabitViewType from 'redux-modules/session/hooks/useHabitViewType';
+
+const HABIT_VIEW_TYPE = {
+  week: 'week',
+  month: 'month',
+}
 
 const habitContainerStyles = css`
   display: flex;
@@ -15,10 +22,30 @@ const habitContainerStyles = css`
   }
 `;
 
+const useToggleHabitViewType = () => {
+  const habitViewType = useHabitViewType()
+
+  const updateHabitViewType = useUpdateHabitViewType()
+  const toggleHabitViewType = () => {
+    if (habitViewType === HABIT_VIEW_TYPE.month) {
+      updateHabitViewType({ habitViewType: HABIT_VIEW_TYPE.week })
+    }
+    else {
+      updateHabitViewType({ habitViewType: HABIT_VIEW_TYPE.month })
+    }
+  }
+
+  return { habitViewType, toggleHabitViewType }
+}
+
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
+
+  const { habitViewType, toggleHabitViewType } = useToggleHabitViewType()
+
   return (
     <>
+      <button onClick={toggleHabitViewType}>toggle habit view</button>
       {habitIds.length > 0 && (
         <Flipper flipKey={habitIds.join('')}>
           <div className={habitContainerStyles}>
