@@ -6,6 +6,7 @@ const sessionSlice = createSliceWithRoutines({
     user: {},
     userSettings: {
       habitIds: [],
+      habitViewType: 'week'
     },
   },
   reducers: {
@@ -13,13 +14,14 @@ const sessionSlice = createSliceWithRoutines({
       state.user = action.payload.user;
     },
     setUserSettings: (state, action) => {
-      state.userSettings = action.payload.userSettings;
+      state.userSettings = { ...state.userSettings, ...action.payload.userSettings };
     },
   },
   routines: {
     login: 'LOGIN',
     logout: 'LOGOUT',
     createUser: 'CREATE_USER',
+    updateHabitViewType: 'UPDATE_HABIT_VIEW_TYPE',
   },
   routineReducers: (routines) => ({
     [routines.logout.SUCCESS]: (state) => {
@@ -31,6 +33,9 @@ const sessionSlice = createSliceWithRoutines({
     [routines.createUser.SUCCESS]: (state, action) => {
       state.user = action.payload.user;
     },
+    [routines.updateHabitViewType.SUCCESS]: (state, action) => {
+      state.userSettings.habitViewType = action.payload.habitViewType;
+    }
   }),
 });
 

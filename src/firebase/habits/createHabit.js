@@ -12,7 +12,7 @@ async function createHabit({ userId, habitName, options = {} }) {
 
     transaction.set(habitRef, { name: habitName, userId, archived: false, ...options });
 
-    transaction.update(userSettingsRef, { habitIds: [...userSettings.habitIds, habitId] });
+    transaction.update(userSettingsRef, { ...userSettings, habitIds: [...userSettings.habitIds, habitId] });
   });
 
   return [habitId, (await firestore.collection('habits').doc(habitId).get()).data()];
