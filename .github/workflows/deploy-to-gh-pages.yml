@@ -23,7 +23,7 @@ jobs:
           REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID }}
           REACT_APP_FIREBASE_APP_ID: ${{ secrets.REACT_APP_FIREBASE_APP_ID }}
         run: |
-          npm install
+          npm install --force
           PUBLIC_URL=https://aarronlee.com/simple-habit-tracker/ npm run build
 
       - name: Deploy 🚀
