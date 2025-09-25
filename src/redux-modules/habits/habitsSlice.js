@@ -1,7 +1,7 @@
-import createSliceWithRoutines from 'redux-modules/utils/createSliceWithRoutines';
+import createSliceWithRoutines from "redux-modules/utils/createSliceWithRoutines";
 
 const habitsSlice = createSliceWithRoutines({
-  name: 'habits',
+  name: "habits",
   initialState: {},
   reducers: {
     updateHabit: (state, action) => {
@@ -18,12 +18,13 @@ const habitsSlice = createSliceWithRoutines({
     },
   },
   routines: {
-    updateHistory: 'UPDATE_HISTORY',
-    createHabit: 'CREATE_HABIT',
-    updateHabit: 'UPDATE_HABIT',
-    deleteHabit: 'DELETE_HABIT',
-    fetchHabit: 'FETCH_HABIT',
-    swapHabit: 'SWAP_HABIT',
+    updateHistory: "UPDATE_HISTORY",
+    createHabit: "CREATE_HABIT",
+    updateHabit: "UPDATE_HABIT",
+    deleteHabit: "DELETE_HABIT",
+    fetchHabit: "FETCH_HABIT",
+    swapHabit: "SWAP_HABIT",
+    reorderHabit: "REORDER_HABIT",
   },
   routineReducers: (routines) => ({
     [routines.createHabit.SUCCESS]: (state, action) => {

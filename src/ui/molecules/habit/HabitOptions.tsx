@@ -1,19 +1,26 @@
-import React, { FunctionComponent, useState, useRef, MutableRefObject } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import useDeleteHabit from 'redux-modules/habits/hooks/useDeleteHabit';
-import useHabit from 'redux-modules/habits/hooks/useHabit';
-import RenameHabitDialog from '../dialogs/RenameHabitDialog';
-import DeleteHabitDialog from '../dialogs/DeleteHabitDialog';
+import React, {
+  FunctionComponent,
+  useState,
+  useRef,
+  MutableRefObject,
+} from "react";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import useDeleteHabit from "redux-modules/habits/hooks/useDeleteHabit";
+import useHabit from "redux-modules/habits/hooks/useHabit";
+import RenameHabitDialog from "../dialogs/RenameHabitDialog";
+import ReorderHabitDialog from "../dialogs/ReorderHabitDialog";
+import DeleteHabitDialog from "../dialogs/DeleteHabitDialog";
 
 type HabitOptionProps = {
   habitId: string;
 };
 
 const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
-  const habit: { name: string; history: object | undefined } = useHabit(habitId);
+  const habit: { name: string; history: object | undefined } =
+    useHabit(habitId);
 
   const iconButtonRef = useRef() as MutableRefObject<HTMLButtonElement>;
 
@@ -22,6 +29,7 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
   const closeOptions = () => setIsOpen(false);
 
   const [renameOpen, setIsRenameOpen] = useState(false);
+  const [reorderOpen, setIsReorderOpen] = useState(false);
   const [deleteOpen, setIsDeleteOpen] = useState(false);
 
   const deleteHabit = useDeleteHabit(habitId);
@@ -53,6 +61,14 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
           }}
         >
           Rename
+        </MenuItem>{" "}
+        <MenuItem
+          onClick={() => {
+            setIsReorderOpen(true);
+            closeOptions();
+          }}
+        >
+          Reorder
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -63,7 +79,16 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
           Delete
         </MenuItem>
       </Menu>
-      <RenameHabitDialog isOpen={renameOpen} habitId={habitId} setIsRenameOpen={setIsRenameOpen} />
+      <RenameHabitDialog
+        isOpen={renameOpen}
+        habitId={habitId}
+        setIsRenameOpen={setIsRenameOpen}
+      />
+      <ReorderHabitDialog
+        isOpen={reorderOpen}
+        habitId={habitId}
+        setIsReorderOpen={setIsReorderOpen}
+      />
       <DeleteHabitDialog
         isOpen={deleteOpen}
         deleteHabit={deleteHabit}
