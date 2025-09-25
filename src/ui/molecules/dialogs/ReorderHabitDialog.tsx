@@ -6,10 +6,10 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
 import useForm from "hooks/useForm";
-import useHabit from "redux-modules/habits/hooks/useHabit";
 import useReorderHabit from "redux-modules/habits/hooks/useReorderHabit";
 import useHabitIds from "redux-modules/habits/hooks/useHabitIds";
 import { InputLabel, Select } from "@material-ui/core";
+import useHabits from "redux-modules/habits/hooks/useHabits";
 
 type ReorderHabitDialogProps = {
   habitId: string;
@@ -22,26 +22,27 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
   isOpen,
   setIsReorderOpen,
 }) => {
-  const habit: { name: string; history: object | undefined } =
-    useHabit(habitId);
+  const habits = useHabits();
+  const habit = habits[habitId];
+  // habitIds has the correct order, don't use order based on useHabits()
   const habitsIds = useHabitIds();
   const { formState, updateField, resetForm } = useForm();
   const reorderHabit = useReorderHabit();
+
+  const currentPositionIdx = habitsIds.indexOf(habitId);
   return (
     <Dialog
       open={isOpen}
       onClose={() => setIsReorderOpen(false)}
       aria-labelledby="update-dialog"
     >
-      <DialogTitle id="update-dialog">
-        Update Habit Order - {habit.name}
-      </DialogTitle>
+      <DialogTitle id="update-dialog">Update Order - {habit.name}</DialogTitle>
       <DialogContent>
-        <InputLabel>Habit Position</InputLabel>
+        <InputLabel>Current Position: {currentPositionIdx + 1}</InputLabel>
         <Select
           id="habitPosition"
           name="habitPosition"
-          value={formState.habitPosition || habitsIds.indexOf(habitId)}
+          value={formState.habitPosition || currentPositionIdx}
           onChange={updateField}
           fullWidth
         >
@@ -49,7 +50,7 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
             const k = `select-${habitId}-menu-item-${id}`;
             return (
               <MenuItem key={k} value={idx} id={k}>
-                {idx}
+                Position {idx + 1}: {habits[id]?.name}
               </MenuItem>
             );
           })}
