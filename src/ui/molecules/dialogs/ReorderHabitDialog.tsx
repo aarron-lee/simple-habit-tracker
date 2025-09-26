@@ -64,13 +64,17 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
         <Button
           onClick={(e) => {
             const newPosition = formState.habitPosition - 1;
-            if (newPosition >= 0) {
+            if (newPosition >= 0 && newPosition !== currentPosition - 1) {
               reorderHabit({ habitId, newPosition });
             }
             resetForm();
             setIsReorderOpen(false);
           }}
           color="primary"
+          disabled={
+            !formState.habitPosition ||
+            formState.habitPosition === currentPosition
+          }
         >
           Update Position
         </Button>
