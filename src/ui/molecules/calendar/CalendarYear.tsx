@@ -3,6 +3,13 @@ import React, { FunctionComponent } from "react";
 import useHabit from "redux-modules/habits/hooks/useHabit";
 
 import Calendar from "ui/molecules/calendar/Calendar";
+import { css } from "emotion";
+
+const yearContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 type mType = {
   [key: string]: string;
@@ -57,7 +64,7 @@ const CalendarYear: FunctionComponent<CalendarYearProps> = ({
   }
 
   return (
-    <>
+    <div className={yearContainerStyles}>
       {months.map((m) => {
         const monthStr = Months[m];
         return (
@@ -72,7 +79,7 @@ const CalendarYear: FunctionComponent<CalendarYearProps> = ({
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 

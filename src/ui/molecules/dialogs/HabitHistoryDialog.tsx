@@ -37,10 +37,11 @@ const HabitHistoryDialog: FunctionComponent<HabitHistoryDialogProps> = ({
   return (
     <Dialog
       open={isOpen}
+      fullScreen
       onClose={() => setIsHistoryOpen(false)}
       aria-labelledby="update-dialog"
     >
-      <DialogTitle id="update-dialog">Habit History</DialogTitle>
+      <DialogTitle id="update-dialog">Habit History - {habit.name}</DialogTitle>
       <DialogContent>
         {(!years || !history) && (
           <Typography variant="h6">No History</Typography>
