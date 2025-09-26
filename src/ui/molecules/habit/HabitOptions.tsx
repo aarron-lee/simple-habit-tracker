@@ -13,6 +13,7 @@ import useHabit from "redux-modules/habits/hooks/useHabit";
 import RenameHabitDialog from "../dialogs/RenameHabitDialog";
 import ReorderHabitDialog from "../dialogs/ReorderHabitDialog";
 import DeleteHabitDialog from "../dialogs/DeleteHabitDialog";
+import HabitHistoryDialog from "../dialogs/HabitHistoryDialog";
 
 type HabitOptionProps = {
   habitId: string;
@@ -30,6 +31,7 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
 
   const [renameOpen, setIsRenameOpen] = useState(false);
   const [reorderOpen, setIsReorderOpen] = useState(false);
+  const [historyOpen, setIsHistoryOpen] = useState(false);
   const [deleteOpen, setIsDeleteOpen] = useState(false);
 
   const deleteHabit = useDeleteHabit(habitId);
@@ -72,6 +74,14 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
+            setIsHistoryOpen(true);
+            closeOptions();
+          }}
+        >
+          History
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             setIsDeleteOpen(true);
             closeOptions();
           }}
@@ -88,6 +98,11 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         isOpen={reorderOpen}
         habitId={habitId}
         setIsReorderOpen={setIsReorderOpen}
+      />
+      <HabitHistoryDialog
+        isOpen={historyOpen}
+        habitId={habitId}
+        setIsHistoryOpen={setIsHistoryOpen}
       />
       <DeleteHabitDialog
         isOpen={deleteOpen}
