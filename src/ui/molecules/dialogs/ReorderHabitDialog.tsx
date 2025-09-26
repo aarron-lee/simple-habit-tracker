@@ -29,7 +29,7 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
   const { formState, updateField, resetForm } = useForm();
   const reorderHabit = useReorderHabit();
 
-  const currentPositionIdx = habitsIds.indexOf(habitId);
+  const currentPosition = habitsIds.indexOf(habitId) + 1;
   return (
     <Dialog
       open={isOpen}
@@ -38,19 +38,20 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
     >
       <DialogTitle id="update-dialog">Update Order - {habit.name}</DialogTitle>
       <DialogContent>
-        <InputLabel>Current Position: {currentPositionIdx + 1}</InputLabel>
+        <InputLabel>Current Position: {currentPosition}</InputLabel>
         <Select
           id="habitPosition"
           name="habitPosition"
-          value={formState.habitPosition || currentPositionIdx}
+          value={formState.habitPosition || currentPosition}
           onChange={updateField}
           fullWidth
         >
           {habitsIds.map((id: string, idx: number) => {
             const k = `select-${habitId}-menu-item-${id}`;
+            const pos = idx + 1;
             return (
-              <MenuItem key={k} value={idx} id={k}>
-                Position {idx + 1}: {habits[id]?.name}
+              <MenuItem key={k} value={pos} id={k}>
+                Position {pos}: {habits[id]?.name}
               </MenuItem>
             );
           })}
@@ -62,7 +63,10 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
         </Button>
         <Button
           onClick={(e) => {
-            reorderHabit({ habitId, newPosition: formState.habitPosition });
+            const newPosition = formState.habitPosition - 1;
+            if (newPosition >= 0) {
+              reorderHabit({ habitId, newPosition });
+            }
             resetForm();
             setIsReorderOpen(false);
           }}
