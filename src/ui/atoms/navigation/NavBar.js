@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
@@ -25,6 +25,7 @@ import { useIsDarkTheme } from "../themeProvider/ThemeProvider";
 import { css } from "emotion";
 import { getDate } from "date-fns";
 import useExportData from "hooks/useExportData";
+import { getCurrentDateComponents } from "utils";
 
 const currentDay = () => {
   return `${getDate(Date.now())}`.padStart(2, "0");
@@ -50,6 +51,29 @@ const linkStyles = css`
   }
 `;
 
+const useMonitorDateChangeEffect = () => {
+  useEffect(() => {
+    const { day } = getCurrentDateComponents();
+
+    const checkDateIntervalId = setInterval(() => {
+      try {
+        const currentDateInfo = getCurrentDateComponents();
+
+        if (day !== currentDateInfo.day) {
+          // refresh page
+          window.location.reload();
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }, 10000);
+
+    return () => {
+      clearInterval(checkDateIntervalId);
+    };
+  }, []);
+};
+
 const NavBar = (props) => {
   const [toggle, toggleState] = useToggle();
   const openMenuRef = useRef();
@@ -59,6 +83,8 @@ const NavBar = (props) => {
   const exportData = useExportData();
 
   const isDarkTheme = useIsDarkTheme();
+
+  useMonitorDateChangeEffect();
 
   return (
     <AppBar color={isDarkTheme ? "inherit" : "primary"} position="sticky">

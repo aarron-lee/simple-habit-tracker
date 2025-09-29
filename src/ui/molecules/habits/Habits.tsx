@@ -7,6 +7,7 @@ import useUpdateHabitViewType from "redux-modules/session/hooks/useUpdateHabitVi
 import useHabitViewType from "redux-modules/session/hooks/useHabitViewType";
 import DayHabit from "../habit/DayHabit";
 import { Button, ButtonGroup } from "@material-ui/core";
+import { getCurrentDateComponents } from "utils";
 
 const HABIT_VIEW_TYPE = {
   day: "day",
@@ -42,16 +43,6 @@ const useSetViewType = () => {
     }
   };
 };
-
-function getCurrentDateComponents() {
-  const now = new Date();
-  const year = now.getFullYear();
-
-  const month = now.getMonth();
-  const day = now.getDate();
-
-  return { year, month, day };
-}
 
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
