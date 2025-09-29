@@ -11,6 +11,7 @@ const dayHabitStyles = css`
   width: ${size}px;
   height: ${size}px;
   border-radius: 50%;
+  text-transform: capitalize;
   margin: 0.8rem;
   font-size: 1rem;
   white-space: normal;
