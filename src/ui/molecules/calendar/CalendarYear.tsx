@@ -7,8 +7,17 @@ import { css } from "emotion";
 
 const yearContainerStyles = css`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 1000px;
   align-items: center;
+  justify-content: center;
+  margin: auto;
+`;
+
+const monthContainerStyles = css`
+  margin: auto;
+  min-height: 320px;
 `;
 
 type mType = {
@@ -68,7 +77,7 @@ const CalendarYear: FunctionComponent<CalendarYearProps> = ({
       {months.map((m) => {
         const monthStr = Months[m];
         return (
-          <div key={`${habitId}-${m}-${year}`}>
+          <div key={`${habitId}-${m}-${year}`} className={monthContainerStyles}>
             <Typography variant="h6">{monthStr}</Typography>
             <Calendar
               month={m}
