@@ -5,11 +5,18 @@ import { css } from "emotion";
 import { Flipper, Flipped } from "react-flip-toolkit";
 import useUpdateHabitViewType from "redux-modules/session/hooks/useUpdateHabitView";
 import useHabitViewType from "redux-modules/session/hooks/useHabitViewType";
+import DayHabit from "../habit/DayHabit";
+import { Button, ButtonGroup } from "@material-ui/core";
 
 const HABIT_VIEW_TYPE = {
+  day: "day",
   week: "week",
   month: "month",
 };
+
+const habitViewTypeButtonGroupStyle = css`
+  margin: 1rem;
+`;
 
 const habitContainerStyles = css`
   display: flex;
@@ -22,44 +29,71 @@ const habitContainerStyles = css`
   }
 `;
 
-// const weekHabitContainerStyles = css`
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: wrap;
-//   max-width: 1000px;
-//   align-items: center;
-//   @media only screen and (max-width: 1000px) {
-//     justify-content: center;
-//   }
-// `;
-
-const useToggleHabitViewType = () => {
-  const habitViewType = useHabitViewType();
-
+const useSetViewType = () => {
   const updateHabitViewType = useUpdateHabitViewType();
-  const toggleHabitViewType = () => {
-    if (habitViewType === HABIT_VIEW_TYPE.month) {
-      updateHabitViewType({ habitViewType: HABIT_VIEW_TYPE.week });
-    } else {
-      updateHabitViewType({ habitViewType: HABIT_VIEW_TYPE.month });
+
+  return (viewType: string) => {
+    if (
+      viewType === HABIT_VIEW_TYPE.month ||
+      viewType === HABIT_VIEW_TYPE.day ||
+      viewType === HABIT_VIEW_TYPE.week
+    ) {
+      return updateHabitViewType({ habitViewType: viewType });
     }
   };
-
-  return { habitViewType, toggleHabitViewType };
 };
+
+function getCurrentDateComponents() {
+  const now = new Date();
+  const year = now.getFullYear();
+
+  const month = now.getMonth();
+  const day = now.getDate();
+
+  return { year, month, day };
+}
 
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
+  const habitViewType = useHabitViewType();
 
-  const { habitViewType, toggleHabitViewType } = useToggleHabitViewType();
+  const setViewType = useSetViewType();
+
+  const { year, month, day } = getCurrentDateComponents();
 
   return (
     <>
-      <button onClick={toggleHabitViewType}>toggle habit view</button>
+      <ButtonGroup
+        variant="contained"
+        size="large"
+        className={habitViewTypeButtonGroupStyle}
+      >
+        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.day)}>Day</Button>
+        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.week)}>Week</Button>
+        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.month)}>
+          Month
+        </Button>
+      </ButtonGroup>
       {habitIds.length > 0 && (
         <Flipper flipKey={habitIds.join("")}>
           <div className={habitContainerStyles}>
             {habitIds.map((habitId: string, idx: number) => {
+              if (habitViewType === "day") {
+                return (
+                  <Flipped key={habitId} flipId={habitId}>
+                    {/* <Flipped/> needs a div child */}
+                    <div>
+                      <DayHabit
+                        habitId={habitId}
+                        year={year}
+                        month={month}
+                        day={day}
+                      />
+                    </div>
+                  </Flipped>
+                );
+              }
+
               return (
                 <Flipped key={habitId} flipId={habitId}>
                   {/* <Flipped/> needs a div child */}

@@ -1,17 +1,17 @@
-import React, { FunctionComponent } from 'react';
-import Calendar from 'ui/molecules/calendar/Calendar';
-import Card from '@material-ui/core/Card';
-import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
-import IconButton from '@material-ui/core/IconButton';
-import MonthNav from 'ui/molecules/calendar/MonthNav';
-import Typography from '@material-ui/core/Typography';
-import useHabit from 'redux-modules/habits/hooks/useHabit';
-import { css } from 'emotion';
-import { useDrag } from 'react-dnd';
-import HabitOptions from './HabitOptions';
-import HabitDropZone from './HabitDropZone';
-import HabitNotes from './HabitNotes';
-import useUpdateHabit from 'redux-modules/habits/hooks/useUpdateHabit';
+import React, { FunctionComponent } from "react";
+import Calendar from "ui/molecules/calendar/Calendar";
+import Card from "@material-ui/core/Card";
+import DragIndicatorIcon from "@material-ui/icons/DragIndicator";
+import IconButton from "@material-ui/core/IconButton";
+import MonthNav from "ui/molecules/calendar/MonthNav";
+import Typography from "@material-ui/core/Typography";
+import useHabit from "redux-modules/habits/hooks/useHabit";
+import { css } from "emotion";
+import { useDrag } from "react-dnd";
+import HabitOptions from "./HabitOptions";
+import HabitDropZone from "./HabitDropZone";
+import HabitNotes from "./HabitNotes";
+import useUpdateHabit from "redux-modules/habits/hooks/useUpdateHabit";
 
 const cardStyles: string = css`
   margin: 8px;
@@ -40,7 +40,7 @@ const titleStyles: string = css`
 type HabitProps = {
   habitId: string;
   order: number;
-  habitViewType: 'week' | 'month'
+  habitViewType: "day" | "week" | "month";
 };
 
 export type HabitDragItem = {
@@ -52,21 +52,25 @@ export type HabitDragItem = {
 type HabitType = {
   name: string;
   history: object | undefined;
-  notes: string | undefined
-}
+  notes: string | undefined;
+};
 
-const Habit: FunctionComponent<HabitProps> = ({ habitId, order, habitViewType }) => {
+const Habit: FunctionComponent<HabitProps> = ({
+  habitId,
+  order,
+  habitViewType,
+}) => {
   const habit: HabitType = useHabit(habitId);
 
   const [, drag, preview] = useDrag({
-    item: { id: habitId, type: 'habit', order },
+    item: { id: habitId, type: "habit", order },
   });
 
-  const updateHabit = useUpdateHabit()
+  const updateHabit = useUpdateHabit();
 
   const updateNotes = (notes: string) => {
-    updateHabit({ id: habitId, habit: { notes } })
-  }
+    updateHabit({ id: habitId, habit: { notes } });
+  };
 
   if (!habit) {
     return null;
@@ -89,11 +93,28 @@ const Habit: FunctionComponent<HabitProps> = ({ habitId, order, habitViewType })
           <div className={fillerStyles} />
           <HabitOptions habitId={habitId} />
         </div>
-        <MonthNav showMonthNavButtons={habitViewType === 'month'}>
-          {({ month, year, notesOpen }: { month: number; year: number; notesOpen: boolean }) => (
+        <MonthNav showMonthNavButtons={habitViewType === "month"}>
+          {({
+            month,
+            year,
+            notesOpen,
+          }: {
+            month: number;
+            year: number;
+            notesOpen: boolean;
+          }) => (
             <>
-              <HabitNotes notes={notes ?? ''} notesOpen={notesOpen} updateNotes={updateNotes} />
-              <Calendar month={month} year={year} habitId={habitId} habitViewType={habitViewType} />
+              <HabitNotes
+                notes={notes ?? ""}
+                notesOpen={notesOpen}
+                updateNotes={updateNotes}
+              />
+              <Calendar
+                month={month}
+                year={year}
+                habitId={habitId}
+                habitViewType={habitViewType}
+              />
             </>
           )}
         </MonthNav>
