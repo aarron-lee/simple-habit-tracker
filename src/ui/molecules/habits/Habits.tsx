@@ -59,7 +59,7 @@ const Habits: FunctionComponent = () => {
         size="large"
         className={habitViewTypeButtonGroupStyle}
       >
-        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.day)}>Day</Button>
+        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.day)}>Today</Button>
         <Button onClick={() => setViewType(HABIT_VIEW_TYPE.week)}>Week</Button>
         <Button onClick={() => setViewType(HABIT_VIEW_TYPE.month)}>
           Month
