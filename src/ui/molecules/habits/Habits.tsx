@@ -6,8 +6,10 @@ import { Flipper, Flipped } from "react-flip-toolkit";
 import useUpdateHabitViewType from "redux-modules/session/hooks/useUpdateHabitView";
 import useHabitViewType from "redux-modules/session/hooks/useHabitViewType";
 import DayHabit from "../habit/DayHabit";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button, ButtonGroup, Typography } from "@material-ui/core";
 import { getCurrentDateComponents } from "utils";
+import { useSelector } from "react-redux";
+import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
 
 const HABIT_VIEW_TYPE = {
   day: "day",
@@ -46,6 +48,7 @@ const useSetViewType = () => {
 
 const Habits: FunctionComponent = () => {
   const habitIds = useHabitIds();
+  const isArchivePage = useSelector(selectIsArchiveRoute);
   const habitViewType = useHabitViewType();
 
   const setViewType = useSetViewType();
@@ -54,17 +57,27 @@ const Habits: FunctionComponent = () => {
 
   return (
     <>
-      <ButtonGroup
-        variant="contained"
-        size="large"
-        className={habitViewTypeButtonGroupStyle}
-      >
-        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.day)}>Today</Button>
-        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.week)}>Week</Button>
-        <Button onClick={() => setViewType(HABIT_VIEW_TYPE.month)}>
-          Month
-        </Button>
-      </ButtonGroup>
+      {isArchivePage ? (
+        <Typography variant="h6">Archive</Typography>
+      ) : (
+        <>
+          <ButtonGroup
+            variant="contained"
+            size="large"
+            className={habitViewTypeButtonGroupStyle}
+          >
+            <Button onClick={() => setViewType(HABIT_VIEW_TYPE.day)}>
+              Today
+            </Button>
+            <Button onClick={() => setViewType(HABIT_VIEW_TYPE.week)}>
+              Week
+            </Button>
+            <Button onClick={() => setViewType(HABIT_VIEW_TYPE.month)}>
+              Month
+            </Button>
+          </ButtonGroup>
+        </>
+      )}
       {habitIds.length > 0 && (
         <Flipper flipKey={habitIds.join("")}>
           <div className={habitContainerStyles}>
