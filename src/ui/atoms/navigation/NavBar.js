@@ -26,6 +26,8 @@ import { css } from "emotion";
 import { getDate } from "date-fns";
 import useExportData from "hooks/useExportData";
 import { getCurrentDateComponents } from "utils";
+import { useSelector } from "react-redux";
+import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
 
 const currentDay = () => {
   return `${getDate(Date.now())}`.padStart(2, "0");
@@ -76,6 +78,7 @@ const useMonitorDateChangeEffect = () => {
 
 const NavBar = (props) => {
   const [toggle, toggleState] = useToggle();
+  const isArchivePage = useSelector(selectIsArchiveRoute);
   const openMenuRef = useRef();
 
   const isLoggedIn = useLoggedIn();
@@ -116,10 +119,14 @@ const NavBar = (props) => {
             maxWidth: "960px",
           }}
         />
-        <CreateHabitDialog />
-        <div className={calendarStyles}>
-          <CalendarTodayIcon fontSize="large" />
-        </div>
+        {!isArchivePage && (
+          <>
+            <CreateHabitDialog />
+            <div className={calendarStyles}>
+              <CalendarTodayIcon fontSize="large" />
+            </div>
+          </>
+        )}
         <IconButton
           edge="end"
           aria-label="account of current user"
@@ -177,6 +184,15 @@ const NavBar = (props) => {
                             </Link>
                           </MenuItem>
                           <MenuItem onClick={toggleState}>My account</MenuItem> */}
+                          {isArchivePage ? (
+                            <MenuItem onClick={toggleState}>
+                              <Link to="/">Home</Link>
+                            </MenuItem>
+                          ) : (
+                            <MenuItem onClick={toggleState}>
+                              <Link to="/archive">Archive</Link>
+                            </MenuItem>
+                          )}
                           <MenuItem
                             onClick={() => {
                               exportData();
