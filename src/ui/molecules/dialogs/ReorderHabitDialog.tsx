@@ -10,6 +10,8 @@ import useReorderHabit from "redux-modules/habits/hooks/useReorderHabit";
 import useHabitIds from "redux-modules/habits/hooks/useHabitIds";
 import { InputLabel, Select } from "@material-ui/core";
 import useHabits from "redux-modules/habits/hooks/useHabits";
+import { useSelector } from "react-redux";
+import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
 
 type ReorderHabitDialogProps = {
   habitId: string;
@@ -23,6 +25,7 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
   setIsReorderOpen,
 }) => {
   const habits = useHabits();
+  const isArchivePage = useSelector(selectIsArchiveRoute);
   const habit = habits[habitId];
   // habitIds has the correct order, don't use order based on useHabits()
   const habitsIds = useHabitIds();
@@ -30,6 +33,11 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
   const reorderHabit = useReorderHabit();
 
   const currentPosition = habitsIds.indexOf(habitId) + 1;
+
+  // if there are any archived habits, the dropdown will skip position numbers
+  // so track the label separately from the actual idx
+  let idxLabel = 0;
+
   return (
     <Dialog
       open={isOpen}
@@ -47,11 +55,20 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
           fullWidth
         >
           {habitsIds.map((id: string, idx: number) => {
+            const habit = habits[id];
+            if (isArchivePage && habit.archived === false) {
+              return null;
+            }
+
+            if (!isArchivePage && habit.archived === true) {
+              return null;
+            }
+
             const k = `select-${habitId}-menu-item-${id}`;
             const pos = idx + 1;
             return (
               <MenuItem key={k} value={pos} id={k}>
-                Position {pos}: {habits[id]?.name}
+                Position {idxLabel++}: {habits[id]?.name}
               </MenuItem>
             );
           })}
