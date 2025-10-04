@@ -1,17 +1,17 @@
-import React from 'react';
-import NavBar from 'ui/atoms/navigation/NavBar';
-import SignIn from 'ui/pages/session/SignIn';
-import SignUp from 'ui/pages/session/SignUp';
-import ProfilePage from 'ui/pages/ProfilePage';
-import useAuthPersistence from 'hooks/useAuthPersistence';
-import { Switch, Route } from 'react-router-dom';
-import './App.css';
-import AuthRoute from 'ui/atoms/route/AuthRoute';
-import UnAuthRoute from 'ui/atoms/route/UnAuthRoute';
-import { css } from 'emotion';
-import useLoggedIn from 'hooks/useLoggedIn';
-import Habits from 'ui/molecules/habits/Habits';
-import LandingPage from 'ui/pages/LandingPage';
+import React from "react";
+import NavBar from "ui/atoms/navigation/NavBar";
+import SignIn from "ui/pages/session/SignIn";
+import SignUp from "ui/pages/session/SignUp";
+import ProfilePage from "ui/pages/ProfilePage";
+import useAuthPersistence from "hooks/useAuthPersistence";
+import { Switch, Route } from "react-router-dom";
+import "./App.css";
+import AuthRoute from "ui/atoms/route/AuthRoute";
+import UnAuthRoute from "ui/atoms/route/UnAuthRoute";
+import { css } from "emotion";
+import useLoggedIn from "hooks/useLoggedIn";
+import Habits from "ui/molecules/habits/Habits";
+import LandingPage from "ui/pages/LandingPage";
 
 const appStyles = css`
   display: flex;
@@ -43,9 +43,18 @@ function App() {
           <AuthRoute path="/notes">
             <ProfilePage />
           </AuthRoute>
-          <Route path="/">
-            <div className={appStyles}>{isLoggedIn ? <Habits /> : <LandingPage />}</div>
-          </Route>
+          <Switch>
+            <Route path="/archive">
+              <div className={appStyles}>
+                {isLoggedIn ? <Habits /> : <LandingPage />}
+              </div>
+            </Route>
+            <Route path="/">
+              <div className={appStyles}>
+                {isLoggedIn ? <Habits /> : <LandingPage />}
+              </div>
+            </Route>
+          </Switch>
         </Switch>
       </div>
     </>

@@ -12,6 +12,8 @@ import HabitOptions from "./HabitOptions";
 import HabitDropZone from "./HabitDropZone";
 import HabitNotes from "./HabitNotes";
 import useUpdateHabit from "redux-modules/habits/hooks/useUpdateHabit";
+import { useSelector } from "react-redux";
+import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
 
 const cardStyles: string = css`
   margin: 8px;
@@ -53,6 +55,7 @@ type HabitType = {
   name: string;
   history: object | undefined;
   notes: string | undefined;
+  archived: boolean;
 };
 
 const Habit: FunctionComponent<HabitProps> = ({
@@ -61,6 +64,8 @@ const Habit: FunctionComponent<HabitProps> = ({
   habitViewType,
 }) => {
   const habit: HabitType = useHabit(habitId);
+
+  const showArchivedOnly = useSelector(selectIsArchiveRoute);
 
   const [, drag, preview] = useDrag({
     item: { id: habitId, type: "habit", order },
@@ -75,6 +80,15 @@ const Habit: FunctionComponent<HabitProps> = ({
   if (!habit) {
     return null;
   }
+
+  if (showArchivedOnly && habit.archived === false) {
+    return null;
+  }
+
+  if (!showArchivedOnly && habit.archived === true) {
+    return null;
+  }
+
   const { name, notes } = habit;
   return (
     <HabitDropZone habitId={habitId}>

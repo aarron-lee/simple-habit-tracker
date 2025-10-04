@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import useHabit from "redux-modules/habits/hooks/useHabit";
 import { css, cx } from "emotion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import habitsSlice from "redux-modules/habits/habitsSlice";
 import { get } from "lodash";
+import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
 
 const size = 110;
 
@@ -27,6 +28,7 @@ const activeStyles = css`
 
 const DayHabit = ({ habitId, year, month, day }) => {
   const habit = useHabit(habitId);
+  const showArchivedOnly = useSelector(selectIsArchiveRoute);
 
   const dispatch = useDispatch();
 
@@ -42,6 +44,14 @@ const DayHabit = ({ habitId, year, month, day }) => {
   }, [dispatch, habitId, month, year, day]);
 
   if (!habit) {
+    return null;
+  }
+
+  if (showArchivedOnly && habit.archived === false) {
+    return null;
+  }
+
+  if (!showArchivedOnly && habit.archived === true) {
     return null;
   }
 

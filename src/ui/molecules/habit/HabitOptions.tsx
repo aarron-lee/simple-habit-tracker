@@ -14,6 +14,7 @@ import RenameHabitDialog from "../dialogs/RenameHabitDialog";
 import ReorderHabitDialog from "../dialogs/ReorderHabitDialog";
 import DeleteHabitDialog from "../dialogs/DeleteHabitDialog";
 import HabitHistoryDialog from "../dialogs/HabitHistoryDialog";
+import ArchiveHabitDialog from "../dialogs/ArchiveHabitDialog";
 
 type HabitOptionProps = {
   habitId: string;
@@ -33,6 +34,7 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
   const [reorderOpen, setIsReorderOpen] = useState(false);
   const [historyOpen, setIsHistoryOpen] = useState(false);
   const [deleteOpen, setIsDeleteOpen] = useState(false);
+  const [archiveOpen, setIsArchiveOpen] = useState(false);
 
   const deleteHabit = useDeleteHabit(habitId);
 
@@ -82,6 +84,14 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
+            setIsArchiveOpen(true);
+            closeOptions();
+          }}
+        >
+          Archive
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             setIsDeleteOpen(true);
             closeOptions();
           }}
@@ -108,6 +118,11 @@ const HabitOptions: FunctionComponent<HabitOptionProps> = ({ habitId }) => {
         isOpen={deleteOpen}
         deleteHabit={deleteHabit}
         closeDialog={() => setIsDeleteOpen(false)}
+      />
+      <ArchiveHabitDialog
+        isOpen={archiveOpen}
+        habitId={habitId}
+        setIsArchiveOpen={setIsArchiveOpen}
       />
     </>
   );

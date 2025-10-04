@@ -1,16 +1,25 @@
-import { call, cancel, cancelled, fork, put, select, take, takeLatest } from 'redux-saga/effects';
-import { eventChannel } from 'redux-saga';
-import { firestore } from '../../../firebase/firebase';
-import habitsSlice from '../habitsSlice';
-import sessionSlice from 'redux-modules/session/sessionSlice';
-import currentUserIdSelector from 'redux-modules/session/selectors/currentUserIdSelector';
+import {
+  call,
+  cancel,
+  cancelled,
+  fork,
+  put,
+  select,
+  take,
+  takeLatest,
+} from "redux-saga/effects";
+import { eventChannel } from "redux-saga";
+import { firestore } from "../../../firebase/firebase";
+import habitsSlice from "../habitsSlice";
+import sessionSlice from "redux-modules/session/sessionSlice";
+import currentUserIdSelector from "redux-modules/session/selectors/currentUserIdSelector";
 
 function subscriptionChannel({ userId }) {
   return eventChannel((emitter) => {
     const habitsRef = firestore
-      .collection('habits')
-      .where('userId', '==', userId)
-      .where('archived', '==', false);
+      .collection("habits")
+      .where("userId", "==", userId);
+    // .where('archived', '==', false);
 
     const unsubscribe = habitsRef.onSnapshot((querySnapshot) => {
       querySnapshot.docChanges().forEach((change) => {
@@ -36,15 +45,15 @@ export function* listen(action) {
       const { data: habit, id, type } = yield take(channel);
 
       switch (type) {
-        case 'added': {
+        case "added": {
           yield put(habitsSlice.actions.addHabit({ habit, id }));
           break;
         }
-        case 'modified': {
+        case "modified": {
           yield put(habitsSlice.actions.updateHabit({ habit, id }));
           break;
         }
-        case 'removed': {
+        case "removed": {
           yield put(habitsSlice.actions.deleteHabit({ habit, id }));
           break;
         }
@@ -73,7 +82,7 @@ function* subscribeToHabitsSaga() {
       sessionSlice.routines.login.SUCCESS,
       sessionSlice.routines.createUser.SUCCESS,
     ],
-    handleSubscribe
+    handleSubscribe,
   );
 }
 
