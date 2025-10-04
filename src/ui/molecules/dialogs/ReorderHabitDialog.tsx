@@ -56,11 +56,11 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
         >
           {habitsIds.map((id: string, idx: number) => {
             const habit = habits[id];
-            if (isArchivePage && habit.archived === false) {
+            if (isArchivePage && habit?.archived === false) {
               return null;
             }
 
-            if (!isArchivePage && habit.archived === true) {
+            if (!isArchivePage && habit?.archived === true) {
               return null;
             }
 
