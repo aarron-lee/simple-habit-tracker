@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import useForm from "hooks/useForm";
 import useReorderHabit from "redux-modules/habits/hooks/useReorderHabit";
 import useHabitIds from "redux-modules/habits/hooks/useHabitIds";
-import { InputLabel, Select } from "@material-ui/core";
+import { Select } from "@material-ui/core";
 import useHabits from "redux-modules/habits/hooks/useHabits";
 import { useSelector } from "react-redux";
 import selectIsArchiveRoute from "redux-modules/habits/selectors/selectIsArchiveRoute";
@@ -46,7 +46,6 @@ const ReorderHabitDialog: FunctionComponent<ReorderHabitDialogProps> = ({
     >
       <DialogTitle id="update-dialog">Update Order - {habit.name}</DialogTitle>
       <DialogContent>
-        <InputLabel>Current Position: {currentPosition}</InputLabel>
         <Select
           id="habitPosition"
           name="habitPosition"
