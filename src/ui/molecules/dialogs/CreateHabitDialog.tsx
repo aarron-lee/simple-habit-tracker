@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import useForm from 'hooks/useForm';
-import useCreateHabit from 'redux-modules/habits/hooks/useCreateHabit';
-import useLoggedIn from 'hooks/useLoggedIn';
+import React, { useState, useCallback } from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import useForm from "hooks/useForm";
+import useCreateHabit from "redux-modules/habits/hooks/useCreateHabit";
+import useLoggedIn from "hooks/useLoggedIn";
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
@@ -27,36 +27,46 @@ export default function FormDialog() {
     return null;
   }
 
+  const onSubmit = () => {
+    createHabit(formState);
+    resetForm();
+    handleClose();
+  };
+
   return (
     <div>
       <Button onClick={handleClickOpen}>Create Habit</Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="create-habit-title">
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="create-habit-title"
+      >
         <DialogTitle id="create-habit-title">Create Habit</DialogTitle>
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="habitName"
-            name="habitName"
-            value={formState.habitName || ''}
-            onChange={updateField}
-            label="Habit Name"
-            type="text"
-            fullWidth
-            autoComplete="off"
-          />
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onSubmit();
+            }}
+          >
+            <TextField
+              autoFocus
+              margin="dense"
+              id="habitName"
+              name="habitName"
+              value={formState.habitName || ""}
+              onChange={updateField}
+              label="Habit Name"
+              type="text"
+              fullWidth
+              autoComplete="off"
+            />
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button
-            onClick={(e) => {
-              createHabit(formState);
-              resetForm();
-              handleClose();
-            }}
-          >
-            Create
-          </Button>
+          <Button onClick={onSubmit}>Create</Button>
         </DialogActions>
       </Dialog>
     </div>
