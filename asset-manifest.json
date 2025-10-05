@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "https://aarronlee.com/simple-habit-tracker/static/css/main.a617e044.chunk.css",
-    "main.js": "https://aarronlee.com/simple-habit-tracker/static/js/main.ab684059.chunk.js",
-    "main.js.map": "https://aarronlee.com/simple-habit-tracker/static/js/main.ab684059.chunk.js.map",
+    "main.js": "https://aarronlee.com/simple-habit-tracker/static/js/main.1f43b885.chunk.js",
+    "main.js.map": "https://aarronlee.com/simple-habit-tracker/static/js/main.1f43b885.chunk.js.map",
     "runtime-main.js": "https://aarronlee.com/simple-habit-tracker/static/js/runtime-main.02cf1698.js",
     "runtime-main.js.map": "https://aarronlee.com/simple-habit-tracker/static/js/runtime-main.02cf1698.js.map",
     "static/js/2.a061c346.chunk.js": "https://aarronlee.com/simple-habit-tracker/static/js/2.a061c346.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.02cf1698.js",
     "static/js/2.a061c346.chunk.js",
     "static/css/main.a617e044.chunk.css",
-    "static/js/main.ab684059.chunk.js"
+    "static/js/main.1f43b885.chunk.js"
   ]
 }
