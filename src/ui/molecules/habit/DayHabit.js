@@ -19,11 +19,11 @@ const dayHabitStyles = css`
 `;
 
 const inactiveStyles = css`
-  border: 5px solid lightblue;
+  border: 8px solid lightblue;
 `;
 
 const activeStyles = css`
-  border: 5px solid green;
+  border: 8px solid green;
 `;
 
 const DayHabit = ({ habitId, year, month, day }) => {
