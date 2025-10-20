@@ -128,6 +128,7 @@ const Habit: FunctionComponent<HabitProps> = ({
                 year={year}
                 habitId={habitId}
                 habitViewType={habitViewType}
+                showCurrentDay
               />
             </>
           )}

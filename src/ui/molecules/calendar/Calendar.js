@@ -6,7 +6,13 @@ import Week from "./Week";
 import { useDispatch } from "react-redux";
 import useHabit from "redux-modules/habits/hooks/useHabit";
 
-function Calendar({ month, year, habitId, habitViewType }) {
+function Calendar({
+  month,
+  year,
+  habitId,
+  habitViewType,
+  showCurrentDay = false,
+}) {
   const [weeks, weekNumForToday] = useMemo(
     () => calculateWeeksInMonth({ month, year }),
     [month, year],
@@ -38,6 +44,7 @@ function Calendar({ month, year, habitId, habitViewType }) {
           week={week}
           key={weekNumForToday}
           onDayClick={onDayClick}
+          showCurrentDay={showCurrentDay}
           history={get(history, [year, month], {})}
         />
       </div>
@@ -52,6 +59,7 @@ function Calendar({ month, year, habitId, habitViewType }) {
             week={week}
             key={idx}
             onDayClick={onDayClick}
+            showCurrentDay={showCurrentDay}
             history={get(history, [year, month], {})}
           />
         );

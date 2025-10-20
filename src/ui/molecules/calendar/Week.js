@@ -1,7 +1,8 @@
-import React from 'react';
-import noop from 'lodash/noop';
-import { css, cx } from 'emotion';
-import { useIsDarkTheme } from 'ui/atoms/themeProvider/ThemeProvider';
+import React, { useMemo } from "react";
+import noop from "lodash/noop";
+import { format } from "date-fns";
+import { css, cx } from "emotion";
+import { useIsDarkTheme } from "ui/atoms/themeProvider/ThemeProvider";
 
 const dayContainerStyles = css`
   display: flex;
@@ -23,6 +24,10 @@ const dayStyles = css`
   margin: 5px;
 `;
 
+const currentDayStyles = css`
+  border: 2px solid #19b5bd;
+`;
+
 const activeStyles = css`
   background-color: rgb(51, 192, 255);
   &:hover {
@@ -42,24 +47,29 @@ const darkActiveStyles = css`
   }
 `;
 
-function Week({ week = [], onDayClick, history }) {
+function Week({ week = [], onDayClick, history, showCurrentDay = false }) {
   const isDarkTheme = useIsDarkTheme();
+
+  const currentDay = useMemo(() => parseInt(format(new Date(), "dd")), []);
 
   return (
     <div className={cx(dayContainerStyles)}>
       {week.map((day, idx) => {
         const onClick = day > 0 ? () => onDayClick && onDayClick(day) : noop;
+        const highlightCurrentDay = day === currentDay && showCurrentDay;
 
         const className = cx(
           dayStyles,
           isDarkTheme && darkThemeStyles,
           day > 0 && clickableStyles,
           history[day] && !isDarkTheme && activeStyles,
-          history[day] && isDarkTheme && darkActiveStyles
+          history[day] && isDarkTheme && darkActiveStyles,
+          highlightCurrentDay && currentDayStyles,
         );
+
         return (
           <div key={`${day}-${idx}`} className={className} onClick={onClick}>
-            {day > 0 ? day : ''}
+            <div>{day > 0 ? day : ""}</div>
           </div>
         );
       })}
